@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>AngularJS</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <link rel="stylesheet" href="css/code-guide.css">
+
+  </head>
+  <body>
+    <img src="images/logo.png" alt="Company">
+
+    <div ng-app="myApp" class="content">
+      <div>
+        <p>在输入框中尝试输入:</p>
+        <p>名: <input type="text" ng-model="firstName"></p>
+        <p>姓: <input type="text" ng-model="surname"></p>
+        <p>姓名：{{ surname + firstName }}</p>
+        <p ng-bind="'姓名：'+surname+firstName"></p>
+      </div>
+      <hr>
+      <div ng-controller="myCtrl">
+        <p>尝试修改以下表单:</p>
+        <p>名: <input type="text" ng-model="firstName"></p>
+        <p>姓: <input type="text" ng-model="lastName"></p>
+        <p>姓名: {{ fullName() | uppercase }}</p>
+      </div>
+      <hr>
+      <div ng-init="quantity=2;price=5">
+        <p>单价： <input type="number" ng-model="price"></p>
+        <p>数量： <input type="number" ng-model="quantity"></p>
+        <p>总价： {{ (quantity * price) | currency }}</p>
+        <p>总价： <span ng-bind="(quantity * price) | currency"></span></p>
+      </div>
+      <hr>
+      <div ng-init="person={firstName:'John',lastName:'Doe'}">
+      <h2>AngularJS 对象</h2>
+        <p>person对象： {{ person }}</p>
+        <p>名(person.firstName): {{ person.firstName }}</p>
+        <p>姓(person.lastName): {{ person.lastName }}</p>
+        <p>修改名: <input type="text" ng-model="person.lastName"></p>
+      </div>
+      <hr>
+      <div ng-init="points=[1,15,19,2,40]" ng-controller="namesCtrl">
+      <h2>AngularJS 数组</h2>
+        <p>数组 {{ points }}</p>
+        <p>第三个值为 {{ points[2] }}</p>
+        <p>数组的长度 {{ points.length }}</p>
+
+        <h4>循环输出数组对象</h4>
+        <ul>
+          <li ng-repeat="x	in names | orderBy:'name'">
+            {{ x.name + ', ' + x.country }}
+          </li>
+        </ul>
+      </div>
+      <hr>
+      <div ng-controller="namesCtrl">
+        <h2>过滤输入</h2>
+        <p><input type="text" ng-model="test"></p>
+        <ul>
+          <li ng-repeat="x in names | filter:test | orderBy:'name'">
+            {{ (x.name | uppercase) + ', ' + x.country }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.firstName = "John";
+        $scope.lastName = "Doe";
+        $scope.fullName = function() {
+            return $scope.firstName + " " + $scope.lastName;
+        }
+    });
+    app.controller('namesCtrl', function($scope) {
+        $scope.names = [
+            {name:'Jani',country:'Norway'},
+            {name:'Hege',country:'Sweden'},
+            {name:'Kai',country:'Denmark'}
+        ];
+    });
+    </script>
+
+  </body>
+</html>

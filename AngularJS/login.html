@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>AngularJS</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <link rel="stylesheet" href="css/code-guide.css">
+
+  </head>
+
+  <body>
+
+    <div ng-app="myApp" class="content">
+      <div ng-controller="formCtrl">
+        <h2>AngularJS 表单实例</h2>
+        <form novalidate>
+          <p>First Name:<input type="text" ng-model="user.firstName"></p>
+          <p>Last Name:<input type="text" ng-model="user.lastName"></p>
+          <button ng-click="reset()">RESET</button>
+        </form>
+        <p>form = {{ user }}</p>
+        <p>master = {{ master }}</p>
+      </div>
+      <hr>
+      <div ng-controller="validateCtrl">
+        <h2>AngularJS 输入验证</h2>
+        <form name="myForm" novalidate>
+          <p>用户名:<input type="text" name="user" ng-model="user" required>
+            <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+              <span ng-show="myForm.user.$error.required">用户名是必须的。</span>
+            </span>
+          </p>
+          <p>邮箱:<input type="email" name="email" ng-model="email" required>
+            <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+              <span ng-show="myForm.email.$error.required">邮箱是必须的。</span>
+              <span ng-show="myForm.email.$error.email">非法的邮箱地址。</span>
+            </span>
+          </p>
+          <p><input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid
+              || myForm.email.$dirty && myForm.email.$invalid"></p>
+        </form>
+      </div>
+      <hr>
+      <div ng-controller="apiCtrl">
+        <h2>AngularJS 全局 API</h2>
+        <p>source = {{ source }}</p>
+        <p>angular.copy(source) = {{ sourceCopy }}</p>
+        <p>angular.lowercase(source) = {{ lower }}</p>
+        <p>angular.uppercase(source) = {{ upper }}</p>
+        <p>angular.isString(source) = {{ x1 }}</p>
+        <p>angular.isNumber(source) = {{ x2 }}</p>
+      </div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/myApp.js"></script>
+    <script src="js/myCtrl.js"></script>
+
+  </body>
+</html>

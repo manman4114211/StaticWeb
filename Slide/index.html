@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Slide Demo</title>
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!--用来微信分享时显示-->
+	<div id='wx_pic' style='margin:0 auto;display:none;'>
+	<img src="images/avatar.jpg" />
+	</div>
+<div id="iSlider" class="m-slide">
+    <div class="idx-arrow"></div>
+    <div class="player-btn">
+        <audio id="music" loop="loop" preload="preload" autoplay="autoplay" src="http://www.shendd.com/music/yigerenshenghuo.mp3"></audio>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script src="js/islider.js"></script>
+<script src="js/page.js"></script>
+<script>
+	var list=[];
+	var content = [
+		{"imagePath":"images/33.jpg","text":"我是第一幅图片"},
+		{"imagePath":"images/44.jpg","text":"我是第二幅图片"},
+		{"imagePath":"images/11.jpg","text":"我是第三幅图片，下一页会没有文字描述"},
+		{"imagePath":"images/22.jpg","text":""},
+		{"imagePath":"images/5.png","text":"我是第五幅图片"},
+		{"imagePath":"images/6.png","text":"我是最后一幅图片了~"}
+	];
+	for(var i = 0;i<content.length;i++){
+		if(content[i].text != ""){
+			list.push({"content":"<div class='content' style='background-image:url("+content[i].imagePath+")'><div class='text'>"+content[i].text+"<div></div>"});
+		} else {
+			list.push({"content":"<div class='content' style='background-image:url("+content[i].imagePath+")'></div>"});
+		}
+	}
+    var islider = new iSlider({
+        data: list,
+        type: 'dom',
+        dom: document.getElementById("iSlider"),isVertical: true,
+        duration: 1000,
+        isLooping: true,
+        isAutoPlay: true
+    });
+</script>
+</body>
+</html>

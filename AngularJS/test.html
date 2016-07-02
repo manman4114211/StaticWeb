@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>AngularJS</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <link rel="stylesheet" href="css/code-guide.css">
+
+  </head>
+
+  <body>
+
+    <div ng-app="myApp" class="content">
+      <div ng-controller="namesCtrl">
+        <h2>AngularJS 表格</h2>
+        <table>
+          <tr ng-repeat="x in names | orderBy : 'country'">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ x.name }}</td>
+            <td>{{ x.country | uppercase }}</td>
+          </tr>
+        </table>
+        <h4>使用 $even 和 $odd</h4>
+        <table>
+          <tr ng-repeat="x in names | orderBy : 'country'">
+            <td>{{ $index }}</td>
+            <td ng-if="$odd">{{ x.name }}</td>
+            <td ng-if="$even">{{ x.name }}</td>
+            <td ng-if="$odd">{{ x.country }}</td>
+            <td ng-if="$even">{{ x.country }}</td>
+            <td>$odd = {{ $odd }}&nbsp;$even = {{ $even }}</td>
+          </tr>
+        </table>
+        <p class="tip">CSS3中,odd 和 even 是可用于匹配下标是奇数或偶数的子元素的关键词!</p>
+      </div>
+      <hr>
+      <div ng-init="mySwitch=true">
+        <h2>AngularJS HTML DOM</h2>
+          <p><button onclick="javascript:alert('hello');" ng-disabled="mySwitch">点我!</button></p>
+        <p><input type="checkbox" ng-model="mySwitch"/>按钮</p>
+        <p>{{ mySwitch }}</p>
+        <p ng-show="true">ng-show我是可见的。</p>
+        <p ng-show="false">ng-show我是不可见的。</p>
+        <p ng-hide="true">ng-hide我是不可见的。</p>
+        <p ng-hide="false">ng-hide我是可见的。</p>
+        <p ng-if="true">ng-if我是可见的。</p>
+        <p ng-if="false">ng-if我是不可见的。</p>
+      </div>
+      <hr>
+      <div ng-controller="myCtrl">
+        <h2>AngularJS 事件</h2>
+        <button ng-click="count = count + 1">计数</button>
+        <button ng-click="count = 0">归0</button>
+        <p>计数器：{{ count }}</p>
+        <button ng-click="toggle()">隐藏/显示</button>
+        <pre ng-hide="myVar">
+        木兰诗
+        [作者]	纳兰性德
+        人生若只如初见，何事秋风悲画扇。等闲变却故人心，却道故人心易变。
+        骊山语罢清宵半，泪雨零铃终不怨。何如薄幸锦衣郎，比翼连枝当日愿。
+        </pre>
+        <pre ng-show="myVar">
+        沙扬娜拉
+        [作者]	徐志摩
+        最是那一低头的温柔，像一朵水莲花不胜凉风的娇羞，
+        道一声珍重，道一声珍重，那一声珍重里有蜜甜的忧愁——沙扬娜拉！
+        </pre>
+      </div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/myApp.js"></script>
+    <script src="js/myCtrl.js"></script>
+
+  </body>
+</html>
