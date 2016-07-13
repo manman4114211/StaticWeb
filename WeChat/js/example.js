@@ -9,20 +9,27 @@ $(function () {
         }
 
         if(el.hasClass('showTooltips')){
-            var weui_input = $('.weui_input').val();
-            if(weui_input == ''){
+            var carNum = $('.weui_input').val();
+            if(carNum == ''){
                 $('.js_tooltips').show();
                 setTimeout(function (){
                     $('.js_tooltips').hide();
-                }, 1000);
+                }, 1500);
             } else {
+                $('#carNum').html(carNum);
                 $('#dialog').show().on('click', '.weui_btn_dialog', function () {
-                    $('#dialog').off('click').hide();
+                    if($(this).hasClass('primary')) {
+                        // 增加车辆
+                        location.href = "myCar.html";
+                    } else {
+                        $('#dialog').off('click').hide();
+                    }
                 });
             }
         }
 
-        if(el.hasClass('weui_cell') || el.hasClass('chepaihao')){
+        // 我的车辆页面
+        if(el.hasClass('weui_cell') || el.parents('a').hasClass('weui_cell')){
             currCar = el.hasClass('weui_cell') ? el : el.parents('a');
             var mask = $('#mask');
             var weuiActionsheet = $('#weui_actionsheet');
@@ -38,7 +45,6 @@ $(function () {
             });
             // 删除
             $('#deleteCar').one('click', function () {
-                console.log(currCar.length);
                 currCar.remove();
                 hideActionSheet(weuiActionsheet, mask);
             });
@@ -60,13 +66,5 @@ $(function () {
                 });
             }
         }
-
-        if(el.hasClass('no_parking_record') || el.parents('div').hasClass('no_parking_record')){
-            $('#dialog2').show().on('click', '.weui_btn_dialog', function () {
-                $('#dialog2').off('click').hide();
-            });
-        }
-
     });
-
 });

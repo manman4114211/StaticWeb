@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>预约车位</title>
     <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        .charge_rule {
+            float: right;
+            display: inline-block;
+            color: #428BCA;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
     <div class="weui_panel_bd">
         <div class="weui_media_box weui_media_text">
-            <h4 class="weui_media_title">海康威视停车场</h4>
+            <h4 class="weui_media_title">
+                <span style="font-size: 24px;font-weight: 600;">海康威视停车场</span>
+                <a href="javascript:;" class="charge_rule">收费规则</a>
+            </h4>
             <p class="weui_media_desc">198个空车位，共300个停车位</p>
         </div>
     </div>
-    <div class="weui_cells weui_cells_form">
+    <div class="weui_cells weui_cells_form" style="margin-top: 5px;">
         <div class="weui_cell">
-            <div class="weui_cell_hd"><label for="" class="weui_label">预约时间</label></div>
+            <div class="weui_cell_hd"><label class="weui_label">预约时间</label></div>
             <div class="weui_cell_bd weui_cell_primary">
                 <input class="weui_input" type="datetime-local" value="" placeholder="">
             </div>
@@ -33,15 +44,6 @@
                 <input class="weui_input" type="text" pattern="/^[a-zA-Z0-9\u4E00-\u9FA5]{7,10}$/" placeholder="请输入车牌号" value="浙A940SB">
             </div>
         </div>
-        <!--<div class="weui_cell weui_cell_warn">
-            <div class="weui_cell_hd"><label for="" class="weui_label">车牌号</label></div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="number" pattern="[0-9]*" value="weui input error" placeholder="请输入车牌号">
-            </div>
-            <div class="weui_cell_ft">
-                <i class="weui_icon_warn"></i>
-            </div>
-        </div>-->
     </div>
     <div class="weui_btn_area">
         <a class="weui_btn weui_btn_primary showTooltips" href="javascript:;" id="showTooltips">预约车位</a>
