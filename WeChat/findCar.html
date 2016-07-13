@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>找车路线</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="searchbar">
+        <div class="hd"></div>
+        <div class="bd">
+            <div class="weui_search_bar" id="search_bar">
+                <form class="weui_search_outer">
+                    <div class="weui_search_inner">
+                        <i class="weui_icon_search"></i>
+                        <input type="search" class="weui_search_input" id="search_input" placeholder="输入车牌中连续三位数字/字母" required="">
+                        <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+                    </div>
+                    <label for="search_input" class="weui_search_text" id="search_text">
+                        <i class="weui_icon_search"></i>
+                        <span>搜索</span>
+                    </label>
+                </form>
+                <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+            </div>
+            <div class="weui_cells weui_cells_access search_show" id="search_show" style="display: none;">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>实时搜索文本</p>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>实时搜索文本</p>
+                    </div>
+                </div>
+                <div class="weui_cell no_parking_record">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>实时搜索文本</p>
+                    </div>
+                </div>
+                <div class="weui_cell no_parking_record">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>实时搜索文本</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui_dialog_alert" id="dialog2" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">友情提示</strong></div>
+        <div class="weui_dialog_bd">该车无停车记录</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/example.js"></script>
+<script>
+    $('#container').on('focus', '#search_input', function () {
+        var $weuiSearchBar = $('#search_bar');
+        $weuiSearchBar.addClass('weui_search_focusing');
+    }).on('blur', '#search_input', function () {
+        var $weuiSearchBar = $('#search_bar');
+        $weuiSearchBar.removeClass('weui_search_focusing');
+        if ($(this).val()) {
+            $('#search_text').hide();
+        } else {
+            $('#search_text').show();
+        }
+    }).on('input', '#search_input', function () {
+        var $searchShow = $("#search_show");
+        if ($(this).val()) {
+            $searchShow.show();
+        } else {
+            $searchShow.hide();
+        }
+    }).on('touchend', '#search_cancel', function () {
+        $("#search_show").hide();
+        $('#search_input').val('');
+    }).on('touchend', '#search_clear', function () {
+        $("#search_show").hide();
+        $('#search_input').val('');
+    });
+</script>
+</body>
+</html>

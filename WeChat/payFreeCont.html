@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>支付详情</title>
+    <link rel="stylesheet" href="css/weui.min.css"/>
+    <style>
+        .weui_cell_primary {
+            font-size: 18px;
+            color: #888;
+        }
+        .weui_cell_ft {
+            font-size: 18px;
+            color: #000;
+        }
+        .clearFix:after {
+            clear: both;
+            display: block;
+            visibility: hidden;
+            height: 0;
+            line-height: 0;
+            content: '';
+        }
+        .css-paper {
+            width: 96%;
+            margin: auto;
+        }
+        .css-paper-left {
+            display: inline-block;
+            float: left;
+            width: 70%;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 5%;
+            background: url("images/payDis_left.png") left center no-repeat #eeeeee !important;
+        }
+        .css-paper-right {
+            display: inline-block;
+            text-align: center;
+            color: #FFF;
+            float: left;
+            width: 25%;
+            height: 40px;
+            line-height: 40px;
+            background: url("images/payDis_right.png") right center no-repeat #F34546 !important;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="hd">
+        <img src="images/sample_car.png" alt="" style="max-width: 100%;margin-bottom: 10px;">
+    </div>
+    <div class="weui_panel_bd">
+        <div class="css-paper clearFix">
+            <div class="css-paper-left"><p>优惠券</p></div>
+            <div class="css-paper-right"><b>未使用</b></div>
+        </div>
+        <div class="weui_cells">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>总费用</p>
+                </div>
+                <div class="weui_cell_ft">20.80元</div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>已缴费</p>
+                </div>
+                <div class="weui_cell_ft">10.00元</div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>车牌号</p>
+                </div>
+                <div class="weui_cell_ft">浙AJ268V</div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>时长</p>
+                </div>
+                <div class="weui_cell_ft">8小时32分钟</div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>入场时间</p>
+                </div>
+                <div class="weui_cell_ft">2016/07/13 09:45:18</div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>需支付</p>
+                </div>
+                <div class="weui_cell_ft" style="font-size: 32px;">12.80元</div>
+            </div>
+        </div>
+        <div class="weui_btn_area">
+            <a class="weui_btn weui_btn_primary showTooltips" href="javascript:;">支付</a>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script src="js/example.js"></script>
+</body>
+</html>

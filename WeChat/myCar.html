@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>车辆列表</title>
+    <link rel="stylesheet" href="css/weui.min.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="weui_panel weui_panel_access">
+        <div class="weui_panel_hd">我的车辆列表</div>
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_small_appmsg">
+                <div class="weui_cells weui_cells_access">
+                    <a class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_hd"><img src="images/icon_nav_cell.png" alt="" style="width:20px;margin-right:15px;display:block"></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="chepaihao">浙A940SB</p>
+                        </div>
+                    </a>
+                    <a class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_hd"><img src="images/icon_nav_cell.png" alt="" style="width:20px;margin-right:15px;display:block"></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="chepaihao">浙A9402B</p>
+                        </div>
+                    </a>
+                    <a class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_hd"><img src="images/icon_nav_cell.png" alt="" style="width:20px;margin-right:15px;display:block"></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="chepaihao">浙A9403B</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_primary" href="addCar.html">添加车辆</a>
+    </div>
+</div>
+<div id="actionSheet_wrap">
+    <div class="weui_mask_transition" id="mask"></div>
+    <div class="weui_actionsheet" id="weui_actionsheet">
+        <div class="weui_actionsheet_menu">
+            <div class="weui_actionsheet_cell" id="deleteCar">删除</div>
+            <div class="weui_actionsheet_cell" id="setDefault">设为默认</div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
+        </div>
+    </div>
+</div>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/example.js"></script>
+</body>
+</html>
