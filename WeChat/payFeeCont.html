@@ -30,6 +30,7 @@
             width: 70%;
             height: 40px;
             line-height: 40px;
+            font-weight: bold;
             padding-left: 5%;
             background: url("images/pay_dis_left.png") left center no-repeat #eeeeee !important;
         }
@@ -40,6 +41,7 @@
             float: left;
             width: 25%;
             height: 40px;
+            font-weight: bold;
             line-height: 40px;
             background: url("images/pay_dis_right.png") right center no-repeat #F34546 !important;
         }
@@ -53,9 +55,15 @@
     <div class="weui_panel_bd">
         <div class="css-paper clearFix">
             <div class="css-paper-left"><p>优惠券</p></div>
-            <div class="css-paper-right"><b>10元</b></div>
+            <div class="css-paper-right"><p>10元</p></div>
         </div>
-        <div class="weui_cells">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p style="color: black;">收费规则</p>
+            </div>
+            <div class="weui_cell_ft" style="color: #10aeff;">点击查看</div>
+        </div>
+        <div class="weui_cells" style="margin-top: 0;">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <p>总费用</p>
@@ -98,7 +106,5 @@
         </div>
     </div>
 </div>
-<script src="js/zepto.min.js"></script>
-<script src="js/example.js"></script>
 </body>
 </html>
