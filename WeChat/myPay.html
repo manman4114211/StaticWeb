@@ -3,54 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>消费记录</title>
-    <link rel="stylesheet" href="css/weui.min.css"/>
+    <title>我的交易记录</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        .weui-cell__bd,.weui-cell__ft {
+            color: #4d4d4d;
+        }
+        .weui-panel__hd:after {
+            margin-right: 15px;
+            border-bottom: 1px solid #dcdcdc;
+        }
+        .weui-panel:first-child {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_panel weui_panel_access">
-        <div class="weui_panel_hd" style="font-size: 18px;">我的消费记录</div>
-        <div class="weui_panel_bd weui_cells_access">
-            <a href="myPayCont.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">10.00元</h4>
-                    <p class="weui_media_desc">浙A568FD</p>
-                </div>
-                <div class="weui_cell_ft">无优惠</div>
-            </a>
-            <a href="myPayCont.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">20.00元</h4>
-                    <p class="weui_media_desc">浙A568FD</p>
-                </div>
-                <div class="weui_cell_ft">优惠5元</div>
-            </a>
-            <a href="myPayCont.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">10.00元</h4>
-                    <p class="weui_media_desc">浙A568FD</p>
-                </div>
-                <div class="weui_cell_ft">无优惠</div>
-            </a>
-            <a href="myPayCont.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">50.00元</h4>
-                    <p class="weui_media_desc">浙A568FD</p>
-                </div>
-                <div class="weui_cell_ft">优惠10元</div>
-            </a>
-            <a href="myPayCont.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">10.00元</h4>
-                    <p class="weui_media_desc">浙A568FD</p>
-                </div>
-                <div class="weui_cell_ft">无优惠</div>
-            </a>
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <p>2016-07-23 14:36:23</p>
         </div>
-        <a class="weui_panel_ft" href="javascript:;">查看更多</a>
+        <div class="weui-panel__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">浙A568FD</div>
+                <div class="weui-cell__ft">¥12.80</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <span>2016-07-23 14:36:23</span>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>浙A56843</p>
+                </div>
+                <div class="weui-cell__ft">¥12.80</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <span>2016-07-23 14:36:23</span>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>浙A568FD</p>
+                </div>
+                <div class="weui-cell__ft">¥12.80</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <span>2016-07-23 14:36:23</span>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>浙A568HG</p>
+                </div>
+                <div class="weui-cell__ft">¥12.80</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <span>2016-07-23 14:36:23</span>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>浙A568FD</p>
+                </div>
+                <div class="weui-cell__ft">¥12.80</div>
+            </div>
+        </div>
     </div>
 </div>
-    <script src="js/zepto.min.js"></script>
-    <script src="js/example.js"></script>
+
+<script src="js/zepto.min.js"></script>
+<script>
+    $(function() {
+        $(document.body).on('click',function(e) {
+            var el = $(e.target);
+
+            if(el.hasClass('weui_panel_ft')){
+                var html = $(".weui_panel_bd").html();
+                $(".weui_panel_bd").append(html);
+            }
+
+            if(el.parents('div').hasClass('weui-panel')) {
+                var transactionInfo = el.parents('.weui-panel');
+                var carNum = transactionInfo.children('.weui-panel__bd').find('p').html();
+                location.href = 'myPayCont.html?carNum=' + carNum;
+            }
+        });
+    });
+</script>
 </body>
 </html>

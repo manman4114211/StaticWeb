@@ -3,60 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>停车场列表</title>
-    <link rel="stylesheet" href="css/weui.min.css"/>
+    <title>选择停车场</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        .summary {
+            font-size: 13px;
+            color: #888888;
+        }
+        .weui-cells {
+            margin: 8px 10px;
+            border-left: 1px solid #D9D9D9;;
+            border-right: 1px solid #D9D9D9;;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_panel weui_panel_access">
-        <div class="weui_panel_hd" style="font-size: 18px;">附近停车场列表</div>
-        <div class="weui_panel_bd weui_cells_access">
-            <a href="myAppoint.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_hd">
-                    <img class="weui_media_appmsg_thumb" src="images/icon_park.png" alt="">
-                </div>
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">星光大道停车场</h4>
-                    <p class="weui_media_desc">118个空车位，共200个停车位</p>
-                </div>
-                <span class="weui_cell_ft"></span>
-            </a>
-            <a href="myAppoint.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_hd">
-                    <img class="weui_media_appmsg_thumb" src="images/icon_park.png" alt="">
-                </div>
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">星耀城停车场</h4>
-                    <p class="weui_media_desc">198个空车位，共300个停车位</p>
-                </div>
-                <span class="weui_cell_ft"></span>
-            </a>
-            <a href="myAppoint.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_hd">
-                    <img class="weui_media_appmsg_thumb" src="images/icon_park.png" alt="">
-                </div>
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">海康威视停车场</h4>
-                    <p class="weui_media_desc">198个空车位，共300个停车位</p>
-                </div>
-                <span class="weui_cell_ft"></span>
-            </a>
-            <a href="myAppoint.html" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_hd">
-                    <img class="weui_media_appmsg_thumb" src="images/icon_park.png" alt="">
-                </div>
-                <div class="weui_media_bd">
-                    <h4 class="weui_media_title">吉利停车场</h4>
-                    <p class="weui_media_desc">198个空车位，共300个停车位</p>
-                </div>
-                <span class="weui_cell_ft"></span>
-            </a>
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>星光大道停车场</p>
+                <p class="summary">118个空车位，共200个停车位</p>
+            </div>
         </div>
-        <a class="weui_panel_ft" href="javascript:;">查看更多</a>
+    </div>
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>星耀城停车场</p>
+                <p class="summary">198个空车位，共300个停车位</p>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>海康威视停车场</p>
+                <p class="summary">198个空车位，共300个停车位</p>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>吉利停车场</p>
+                <p class="summary">198个空车位，共300个停车位</p>
+            </div>
+        </div>
     </div>
 </div>
 
-    <script src="js/zepto.min.js"></script>
-    <script src="js/example.js"></script>
+<script src="js/zepto.min.js"></script>
+<script>
+    $(function() {
+        $('.weui-cells').on('click', function(){
+           location.href = "myAppoint.html";
+        });
+    });
+</script>
 </body>
 </html>

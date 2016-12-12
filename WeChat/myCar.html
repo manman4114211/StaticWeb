@@ -3,63 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>车辆列表</title>
-    <link rel="stylesheet" href="css/weui.min.css"/>
+    <title>我的车辆</title>
+    <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .little_car {
-            width: 30px;
-            margin-right: 10px;
-            display: block
+        .container {
+            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
+        }
+        .weui-input {
+            font-size: 16px;
+        }
+        .btn_car-add {
+            font-size: 15px;
+            color: #06a5f7;
+        }
+        .default_car {
+            color: #06a5f7;
+            font-size: 17px;
+        }
+        .default_icon {
+            font-size: small;
+            color: #BBB;
+        }
+        .car-list {
+            border-left: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            margin: 20px;
+        }
+        .weui-cell {
+            padding: 10px 25px;
+        }
+        .weui-cell:before {
+            right: 15px;
+        }
+        .weui-actionsheet__cell {
+            font-size: 14px;
+            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_panel weui_panel_access">
-        <div class="weui_panel_hd" style="font-size: 18px;">我的车辆列表</div>
-        <div class="weui_panel_bd">
-            <div class="weui_media_box weui_media_small_appmsg">
-                <div class="weui_cells weui_cells_access">
-                    <a class="weui_cell" href="javascript:;">
-                        <div class="weui_cell_hd"><img src="images/little_car.png" alt="" class="little_car"></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <p>浙A940SB</p>
-                        </div>
-                        <div class="icon_sp_area"><i class="weui_icon_success"></i></div>
-                    </a>
-                    <a class="weui_cell" href="javascript:;">
-                        <div class="weui_cell_hd"><img src="images/little_car.png" alt="" class="little_car"></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <p>浙A9402B</p>
-                        </div>
-                    </a>
-                    <a class="weui_cell" href="javascript:;">
-                        <div class="weui_cell_hd"><img src="images/little_car.png" alt="" class="little_car"></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <p>浙A9403B</p>
-                        </div>
-                    </a>
+    <div class="page">
+        <div class="page__bd">
+            <div class="weui-cells weui-piece_shadow">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="输入车牌号，例如浙A12345" value="" autofocus id="addInput"/>
+                    </div>
+                    <a href="javascript:;" class="btn_car-add" id="addText" style="display: none;">添加</a>
+                </div>
+            </div>
+        </div>
+        <div class="page__bd">
+            <div class="weui-cells car-list weui-piece_shadow" id="carList">
+                <div class="weui-cell default_car">
+                    <div class="weui-cell__bd">
+                        <p>浙A940SB</p>
+                    </div>
+                    <div class="default_icon">默认固定车辆</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>浙A9402B</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_primary" href="addCar.html">添加车辆</a>
+</div>
+<div class="weui-toptips weui-toptips_warn js_tooltips">车牌号格式不对</div>
+<div class="weui-mask" id="iosMask" style="display: none"></div>
+<div class="weui-actionsheet" id="iosActionsheet">
+    <div class="weui-actionsheet__menu">
+        <div class="weui-actionsheet__cell" id="setDefault">设为默认车牌</div>
+        <div class="weui-actionsheet__cell" id="deleteCar">删除</div>
+    </div>
+    <div class="weui-actionsheet__action">
+        <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
     </div>
 </div>
-<div id="actionSheet_wrap">
-    <div class="weui_mask_transition" id="mask"></div>
-    <div class="weui_actionsheet" id="weui_actionsheet">
-        <div class="weui_actionsheet_menu">
-            <div class="weui_actionsheet_cell" id="deleteCar">删除</div>
-            <div class="weui_actionsheet_cell" id="setDefault">设为默认</div>
-        </div>
-        <div class="weui_actionsheet_action">
-            <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
-        </div>
-    </div>
-</div>
-    <script src="js/zepto.min.js"></script>
-    <script src="js/example.js"></script>
+
+<script src="js/zepto.min.js"></script>
+<script>
+    $(function() {
+        var $addInput = $('#addInput'),
+                $addText = $('#addText'),
+                $carList = $('#carList');
+
+        $addInput.on('input', function(){
+            if(this.value.length) {
+                $addText.show();
+            } else {
+                $addText.hide();
+            }
+        });
+        // add car
+        $addText.on('click', function(){
+            var carNum = $addInput.val();
+            if(new RegExp("^[a-zA-Z0-9\u4E00-\u9FA5]{7,10}$").test(carNum)){
+                var html = '<div class="weui-cell">' +
+                        '<div class="weui-cell__bd">' +
+                        '<p>' + carNum + '</p>' +
+                        '</div>' + '</div>';
+                $carList.append(html);
+                $addInput.val('');
+            } else {
+                $('.js_tooltips').show();
+                setTimeout(function (){
+                    $('.js_tooltips').hide();
+                }, 1000);
+            }
+        });
+        // edit car
+        var $currCar;
+        var $iosActionsheet = $('#iosActionsheet'),
+                $iosMask = $('#iosMask'),
+                $setDefault = $('#setDefault');
+
+        function hideActionSheet() {
+            $iosActionsheet.removeClass('weui-actionsheet_toggle');
+            $iosMask.fadeOut(200);
+        }
+        // 呼出上拉菜单
+        $carList.on('click', '.weui-cell', function(){
+            $currCar = $(this);
+
+            $iosActionsheet.addClass('weui-actionsheet_toggle');
+            // 增加如果点击的是默认车牌，则不显示“设为默认车牌”
+            if($currCar.hasClass('default_car')) {
+                $setDefault.hide();
+            } else {
+                $setDefault.show();
+            }
+            $iosMask.fadeIn(200);
+        });
+        // 取消
+        $iosMask.on('click', hideActionSheet);
+        $('#iosActionsheetCancel').on('click', hideActionSheet);
+        // 删除
+        $('#deleteCar').on('click', function () {
+            $currCar.remove();
+            hideActionSheet();
+        });
+        // 设为默认
+        $setDefault.on('click', function () {
+            $currCar.addClass('default_car').siblings().removeClass('default_car');
+            $('.default_icon').remove();
+            $currCar.append('<div class="default_icon">默认固定车辆</div>');
+            hideActionSheet();
+        });
+    });
+</script>
 </body>
 </html>

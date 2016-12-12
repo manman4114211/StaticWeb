@@ -6,96 +6,301 @@
     <title>找车路线</title>
     <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        body {
-            background: url(images/car_search_bg.png) 50% 40% no-repeat fixed;
-            background-size: 65%;
+        .search-text-btn {
+            display: none;
+            color: dodgerblue;
+            position: absolute;
+            top: 4px;
+            right: 0;
+            padding: 0 8px;
+            line-height: 20px;
+            border-left: 1px lightgray solid;
+            font: 15px Microsoft YaHei;
+        }
+        .form-border {
+            border: 1px #efeff4 solid;
+            border-radius:6px;
+        }
+         .form-border_blue {
+            border: 1px dodgerblue solid;
+            border-radius:6px;
+        }
+        .weui-cell__bd {
+            font: 15px Microsoft YaHei;
+            margin-left: 6px;
+        }
+        .default_car {
+            font-size: small;
+            color: #BBB;
+            margin-right: 10px;
+        }
+        .weui-cell:before {
+            right: 20px;
+        }
+        .binding_cars {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            padding-right: 15px;
+            color: #999;
+            font-size: 14px;
+        }
+        .weui-cell_access:nth-child(2):before {
+            border-top-color: dodgerblue;
+        }
+        .weui-media-box_appmsg .weui-media-box__hd {
+            width: 150px;
+            height: 90px;
+            margin-right: 20px;
+            margin-left: 10px;
+        }
+        .weui-media-box {
+            padding: 8px;
+        }
+        .weui-media-box__desc {
+            font-size: 15px;
+            margin: 5px 0;
+        }
+        .searchbar-result {
+            margin-top: 10px;
+        }
+        .weui-media-box__noCar .weui-media-box__thumb {
+            margin-left: 10%;
+            width: 80%;
+        }
+        .no-result-tips {
+            text-align: center;
+            color: black;
+        }
+        .clear-history {
+            color: #999;
+            font-size: 14px;
+            margin: auto;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="searchbar">
-        <div class="bd">
-            <div class="weui_search_bar" id="search_bar">
-                <form class="weui_search_outer">
-                    <div class="weui_search_inner">
-                        <i class="weui_icon_search"></i>
-                        <input type="search" class="weui_search_input" id="search_input" placeholder="输入车牌中连续三位数字/字母" required="">
-                        <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+    <div class="page">
+        <div class="page__hd"></div>
+        <div class="page__bd">
+            <div class="weui-search-bar weui-search-bar_focusing" id="searchBar">
+                <form class="weui-search-bar__form form-border">
+                    <div class="weui-search-bar__box">
+                        <i class="weui-icon-search"></i>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="输入车牌中连续的3位数字/字母" required="" autofocus>
+                        <a href="javascript:" class="weui-icon-clear" id="searchClear" style="right: 40px;margin-right: 6px;"></a>
+                        <a href="javascript:" class="search-text-btn" id="searchText">搜索</a>
                     </div>
-                    <label for="search_input" class="weui_search_text" id="search_text">
-                        <i class="weui_icon_search"></i>
-                        <span>搜索</span>
-                    </label>
                 </form>
-                <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
             </div>
-            <div class="weui_cells weui_cells_access search_show" id="search_show" style="display: none;">
-                <div class="weui_cell no_parking_record">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>实时搜索文本</p>
+            <div class="weui-cells searchbar-result" id="carBinding">
+                <div class="binding_cars">绑定车辆</div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <p>浙A94SB0</p>
+                    </div>
+                    <div class="default_car">默认固定车辆</div>
+                </div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <p>沪C325V1</p>
                     </div>
                 </div>
-                <div class="weui_cell no_parking_record">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>实时搜索文本</p>
+            </div>
+             <div class="weui-cells searchbar-result" id="searchHistory">
+                <div class="binding_cars">搜索历史</div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <p>268</p>
                     </div>
                 </div>
-                <div class="weui_cell no_parking_record">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>实时搜索文本</p>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <p>139</p>
                     </div>
                 </div>
-                <div class="weui_cell no_parking_record">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>实时搜索文本</p>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <p>187</p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="clear-history">
+                        <p>清除历史数据</p>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells searchbar-result" id="searchResult" style="display: none;">
+                <div class="weui-panel__bd">
+                    <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">浙A96SB0</h4>
+                            <p class="weui-media-box__desc">23874662788090</p>
+                            <p class="weui-media-box__desc">2016-12-01 12:34</p>
+                        </div>
+                    </a>
+                    <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">浙A95SB0</h4>
+                            <p class="weui-media-box__desc">23874662788090</p>
+                            <p class="weui-media-box__desc">2016-12-01 12:34</p>
+                        </div>
+                    </a>
+                    <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">浙A95SB0</h4>
+                            <p class="weui-media-box__desc">23874662788090</p>
+                            <p class="weui-media-box__desc">2016-12-01 12:34</p>
+                        </div>
+                    </a>
+                    <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">浙A95SB0</h4>
+                            <p class="weui-media-box__desc">23874662788090</p>
+                            <p class="weui-media-box__desc">2016-12-01 12:34</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="weui-cells searchbar-result" id="searchNoResult" style="display: none;">
+                <div class="weui-panel__bd">
+                    <div class="weui-media-box weui-media-box_text">
+                        <div class="weui-media-box__noCar">
+                            <img class="weui-media-box__thumb" src="images/no_result.png" alt="">
+                        </div>
+                        <p class="weui-media-box__desc no-result-tips">没有匹配到车牌号</p>
+                        <p class="weui-media-box__desc no-result-tips">建议联系商场保安或直接拨打电话0371-58479654</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="page__ft"></div>
     </div>
 </div>
-<div class="weui_dialog_alert" id="dialog2" style="display: none;">
-    <div class="weui_mask"></div>
-    <div class="weui_dialog">
-        <div class="weui_dialog_hd"><strong class="weui_dialog_title">友情提示</strong></div>
-        <div class="weui_dialog_bd">该车无停车记录</div>
-        <div class="weui_dialog_ft">
-            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+<div id="loadingToast" style="opacity: 0; display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-loading weui-icon_toast"></i>
+        <p class="weui-toast__content">正在检索</p>
+    </div>
+</div>
+<div id="dialogs">
+    <div class="js_dialog" id="iosDialog" style="opacity: 0; display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__bd">该车牌无过车记录</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+            </div>
+        </div>
+    </div>
+    <div class="js_dialog" id="androidDialog" style="opacity: 0; display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog weui-skin_android">
+            <div class="weui-dialog__bd">该车牌无过车记录</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+            </div>
         </div>
     </div>
 </div>
 
 <script src="js/zepto.min.js"></script>
-<script src="js/example.js"></script>
-<script>
-    $('#container').on('focus', '#search_input', function () {
-        var $weuiSearchBar = $('#search_bar');
-        $weuiSearchBar.addClass('weui_search_focusing');
-    }).on('blur', '#search_input', function () {
-        var $weuiSearchBar = $('#search_bar');
-        $weuiSearchBar.removeClass('weui_search_focusing');
-        if ($(this).val()) {
-            $('#search_text').hide();
-        } else {
-            $('#search_text').show();
+<script type="text/javascript">
+    $(function(){
+        var $searchResult = $('#searchResult'),
+                $searchNoResult = $('#searchNoResult'),
+                $searchInput = $('#searchInput'),
+                $searchText = $('#searchText'),
+                $carBinding = $('#carBinding'),
+                $searchHistory = $('#searchHistory'),
+                $searchClear = $('#searchClear');
+
+        $searchInput.on('input', function(){
+            if(this.value.length) {
+                showSearchResult(this.value);
+            } else {
+                hideSearchResult();
+            }
+        });
+        function showSearchResult(str){
+            if(str == "268"){
+                $searchResult.show();
+                $searchNoResult.hide();
+            } else {
+                $searchResult.hide();
+                $searchNoResult.show();
+            }
+            $searchText.show();
+            $searchHistory.hide();
+            $carBinding.hide();
+            $('form').removeClass('form-border').addClass('form-border_blue');
         }
-    }).on('input', '#search_input', function () {
-        var $searchShow = $("#search_show");
-        if ($(this).val()) {
-            $searchShow.show();
-        } else {
-            $searchShow.hide();
+        function hideSearchResult(){
+            $searchResult.hide();
+            $searchNoResult.hide();
+            $searchText.hide();
+            $searchHistory.show();
+            $carBinding.show();
+            $('form').removeClass('form-border_blue').addClass('form-border');
         }
-    }).on('touchend', '#search_cancel', function () {
-        $("#search_show").hide();
-        $('#search_input').val('');
-    }).on('touchend', '#search_clear', function () {
-        $("#search_show").hide();
-        $('#search_input').val('');
-    }).on('click', '.weui_cell_primary,.no_parking_record', function(){
-        $('#dialog2').show().on('click', '.weui_btn_dialog', function () {
-            $('#dialog2').off('click').hide();
+        $searchClear.on('click', function(){
+            hideSearchResult();
+            $searchInput.val('');
+            $searchInput.focus();
+        });
+        // loading
+        var $loadingToast = $('#loadingToast');
+        $searchText.on('click', function(){
+            if ($loadingToast.css('display') != 'none') return;
+
+            $loadingToast.fadeIn(100);
+            setTimeout(function () {
+                $loadingToast.fadeOut(100);
+            }, 1000);
+        });
+        $('form').submit(function(){
+            $searchText.click();
+            return false;
+        });
+        $searchHistory.on('click', '.weui-cell_access', function(){
+            $searchText.click();
+        });
+        // Dialog
+        var $iosDialog = $('#iosDialog'),
+                $androidDialog = $('#androidDialog');
+        $('#dialogs').on('click', '.weui-dialog__btn', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+        });
+        $carBinding.on('click', '.weui-cell', function(){
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf('android') != -1;
+            if(isAndroid) {
+                $androidDialog.fadeIn(200);
+            } else {
+                $iosDialog.fadeIn(200);
+            }
+        });
+        $searchResult.on('click', '.weui-media-box', function(){
+            $searchInput.val('');
+            location.href = "findCarMap.html";
+        });
+        //
+        $('.clear-history').click(function(){
+            $searchHistory.remove()
         });
     });
 </script>

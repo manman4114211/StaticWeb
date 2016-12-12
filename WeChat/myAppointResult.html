@@ -3,27 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>预约车位结果</title>
+    <title>预约取消结果</title>
     <link rel="stylesheet" href="css/weui.css"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_msg">
-        <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
-        <div class="weui_text_area">
-            <h2 class="weui_msg_title">取消预约成功</h2>
-        </div>
-        <div class="weui_opr_area">
-            <p class="weui_btn_area">
-                <a href="javascript:;" class="weui_btn weui_btn_primary">确定</a>
-                <a href="javascript:;" class="weui_btn weui_btn_default">取消</a>
-            </p>
-        </div>
-        <div class="weui_extra_area">
-            <a href="javascript:;">重新预约</a>
+    <div class="page" style="display: none;">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">取消成功</h2>
+                <p class="weui-msg__desc">点击查看<a href="javascript:void(0);">预约详情</a></p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <a href="javascript:history.back();" class="weui-btn weui-btn_primary">推荐操作</a>
+                    <a href="javascript:history.back();" class="weui-btn weui-btn_default">辅助操作</a>
+                </p>
+            </div>
+            <div class="weui-msg__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="javascript:void(0);" class="weui-footer__link">重新预约</a>
+                    </p>
+                    <p class="weui-footer__text">Copyright @ 2001-2016 hikvision.com</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!--BEGIN dialog1-->
+<div class="js_dialog" id="iosDialog">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否取消预订？</strong></div>
+        <div class="weui-dialog__bd" style="min-height: 15px;padding: 0;"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">不取消</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">取消</a>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script>
+    $(function() {
+        $(document.body).on('click',function(e) {
+            var el = $(e.target);
 
+            if (el.hasClass('weui-dialog__btn')) {
+                if(el.hasClass('weui-dialog__btn_primary')) {
+                    $('.js_dialog').hide();
+                    $('.page').css('display', '');
+                } else {
+                    $('.js_dialog').hide();
+                    $('.weui-msg__icon-area').html('<i class="weui-icon-warn weui-icon_msg"></i>');
+                    $('.weui-msg__title').html('取消失败');
+                    $('.weui-msg__desc').html('该预约已被取消，不能重复操作');
+                    $('.page').css('display', '');
+                    // 关闭页面
+                    console.log('WeixinJSBridge.invoke("closeWindow", {}, function(e){});');
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

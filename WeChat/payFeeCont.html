@@ -4,107 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>支付详情</title>
-    <link rel="stylesheet" href="css/weui.min.css"/>
+    <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .weui_cell_primary {
-            color: #888;
+        .container {
+            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
         }
-        .weui_cell_ft {
-            color: #000;
+        .weui-form-preview__bd {
+            padding: 20px 30px;
+            font-size: 16px;
         }
-        .clearFix:after {
-            clear: both;
-            display: block;
-            visibility: hidden;
-            height: 0;
-            line-height: 0;
-            content: '';
+        .weui-form-preview__value {
+            color: black;
         }
-        .css-paper {
-            width: 94%;
-            margin: auto;
+        .weui-form-preview__hd:after {
+            margin-right: 15px;
         }
-        .css-paper-left {
-            display: inline-block;
-            float: left;
-            width: 70%;
-            height: 40px;
-            line-height: 40px;
-            font-weight: bold;
-            padding-left: 5%;
-            background: url("images/pay_dis_left.png") left center no-repeat #eeeeee !important;
+        .carNum {
+            margin-bottom: 5px;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ececec;
         }
-        .css-paper-right {
-            display: inline-block;
+        .parking-fee {
             text-align: center;
-            color: #FFF;
-            float: left;
-            width: 25%;
-            height: 40px;
-            font-weight: bold;
-            line-height: 40px;
-            background: url("images/pay_dis_right.png") right center no-repeat #F34546 !important;
+            line-height: 16px;
+            font-size: 15px;
+        }
+        .coupon {
+            color: #02a5f9;
+        }
+        .toll-rule {
+            text-align: center;
+            color: #999;
+            font-size: 15px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="hd">
-        <img src="images/sample_car.png" alt="" style="max-width: 100%;margin-bottom: 10px;">
+    <div class="hd" style="text-align: center;background-color: #FFFFFF;">
+        <img src="images/sample_car.png" alt="" style="max-width: 100%;">
+        <div class="weui-form-preview__bd carNum shadow">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">车牌号码</label>
+                <span class="weui-form-preview__value">浙AJ268V</span>
+            </div>
+        </div>
     </div>
-    <div class="weui_panel_bd">
-        <div class="css-paper clearFix">
-            <div class="css-paper-left"><p>优惠券</p></div>
-            <div class="css-paper-right"><p>10元</p></div>
-        </div>
-        <div class="weui_cell">
-            <div class="weui_cell_bd weui_cell_primary">
-                <p style="color: black;">收费规则</p>
+    <div class="weui-form-preview shadow">
+        <div class="weui-form-preview__hd">
+            <div class="parking-fee">
+                <span>停车费</span>
             </div>
-            <div class="weui_cell_ft" style="color: #10aeff;">点击查看</div>
-        </div>
-        <div class="weui_cells" style="margin-top: 0;">
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>总费用</p>
-                </div>
-                <div class="weui_cell_ft">20.80元</div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>已优惠</p>
-                </div>
-                <div class="weui_cell_ft">10.00元</div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>车牌号</p>
-                </div>
-                <div class="weui_cell_ft">浙AJ268V</div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>时长</p>
-                </div>
-                <div class="weui_cell_ft">8小时32分钟</div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>入场时间</p>
-                </div>
-                <div class="weui_cell_ft">2016/07/13 09:45:18</div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>需支付</p>
-                </div>
-                <div class="weui_cell_ft" style="font-size: 34px;">12.80元</div>
+            <div class="weui-form-preview__item" style="text-align: center;font-size: larger;">
+                <em class="weui-form-preview__value" >¥22.80</em>
             </div>
         </div>
-        <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_primary showTooltips" href="javascript:;">支付</a>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">入场时间</label>
+                <span class="weui-form-preview__value">2016/07/13 09:45:18</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">卡号</label>
+                <span class="weui-form-preview__value">23874662788090</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">时长</label>
+                <span class="weui-form-preview__value">3.7小时</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">优惠券</label>
+                <span class="weui-form-preview__value coupon">未选择</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">已优惠</label>
+                <span class="weui-form-preview__value">-¥10.00</span>
+            </div>
+            <a href="javascript:;" class="weui-btn weui-btn_gradient">微信支付</a>
         </div>
+    </div>
+    <div class="toll-rule">
+        <span>收费规则</span>
     </div>
 </div>
+
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.toll-rule span').click(function(){
+            location.href = "payRule.html?flag=1";
+        });
+        $('.coupon').click(function(){
+            location.href = "payDiscount.html";
+        });
+    });
+</script>
 </body>
 </html>

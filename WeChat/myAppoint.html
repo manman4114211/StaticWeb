@@ -6,63 +6,182 @@
     <title>预约车位</title>
     <link rel="stylesheet" href="css/weui.css"/>
     <style>
+        .container {
+            font-family: "微软雅黑", "STXihei", sans-serif;
+        }
+        .title {
+            font-size: 20px;
+        }
+        .summary {
+            font-size: 13px;
+            color: #888888;
+        }
         .charge_rule {
             float: right;
             display: inline-block;
-            color: #428BCA;
-            font-weight: 600;
+            color: #10aeff;
+            font-size: 16px;
+            padding-top: 25px;
+        }
+        .weui-time {
+            float: right;
+            line-height: 44px;
+            padding-right: 30px;
+        }
+        .btn-scheduled {
+            margin: 30px 20px;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_panel_bd">
-        <div class="weui_media_box weui_media_text">
-            <h4 class="weui_media_title">
-                <span style="font-size: 24px;font-weight: 600;">海康威视停车场</span>
-                <a href="payRule.html" class="charge_rule">收费规则</a>
-            </h4>
-            <p class="weui_media_desc">198个空车位，共300个停车位</p>
+    <div class="weui-cells weui-piece_shadow" style="margin-top: 0;padding: 10px 5px;">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="title">海康二期停车场</p>
+                <p class="summary">198个空车位，共300个停车位</p>
+            </div>
+            <a href="payRule.html" class="charge_rule">收费规则</a>
         </div>
     </div>
-    <div class="weui_cells weui_cells_form" style="margin-top: 5px;">
-        <div class="weui_cell">
-            <div class="weui_cell_hd"><label class="weui_label">预约时间</label></div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="datetime-local" value="" placeholder="">
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label class="weui-label">预约时间</label>
             </div>
-        </div>
-        <div class="weui_cell">
-            <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号">
-            </div>
-        </div>
-        <div class="weui_cell">
-            <div class="weui_cell_hd"><label class="weui_label">车牌号</label></div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="text" pattern="/^[a-zA-Z0-9\u4E00-\u9FA5]{7,10}$/" placeholder="请输入车牌号" value="浙A940SB">
+            <div class="weui-cell__bd" id="showDatePicker">
+                <label class="weui-time" id="scheduledTime">今天 12:20</label>
             </div>
         </div>
     </div>
-    <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_primary showTooltips" href="javascript:;" id="showTooltips">预约车位</a>
+    <div class="weui-cells weui-piece_shadow">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="datetime-local" placeholder="请输入手机号" value="" id="telInput">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">车牌号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="输入车牌号，例如浙A12345" value="" id="carNumInput">
+            </div>
+        </div>
+    </div>
+    <div class="btn-scheduled">
+        <a href="javascript:;" class="weui-btn weui-btn_gradient" id="btnScheduled">预定车位</a>
     </div>
 </div>
-<div class="weui_toptips weui_warn js_tooltips">手机号码格式不对</div>
-<div class="weui_dialog_confirm" id="dialog" style="display: none;">
-<div class="weui_mask"></div>
-<div class="weui_dialog">
-    <div class="weui_dialog_hd"><strong class="weui_dialog_title">预约提示</strong></div>
-    <div class="weui_dialog_bd">车位将保留到2016/07/08 12:45，确认？</div>
-    <div class="weui_dialog_ft">
-        <a href="#" class="weui_btn_dialog default">取消</a>
-        <a href="#" class="weui_btn_dialog primary">确定</a>
+<div class="weui-toptips weui-toptips_warn js_tooltips">未知错误</div>
+<div id="dialogs">
+    <div class="js_dialog" id="iosDialog" style="opacity: 0; display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd">预定成功</div>
+            <div class="weui-dialog__bd">车位将保留到今天12:45</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <div class="js_dialog" id="androidDialog" style="opacity: 0; display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog weui-skin_android">
+            <div class="weui-dialog__hd">预定成功</div>
+            <div class="weui-dialog__bd">车位将保留到今天12:45</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+            </div>
+        </div>
     </div>
 </div>
-</div>
+<a href="javascript:;" id="showPicker">单列选择器</a>
 
-    <script src="js/zepto.min.js"></script>
-    <script src="js/example.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+
+<script>
+    $(function(){
+        $('#showDatePicker').on('click', function () {
+            weui.datePicker({
+                start: new Date().getFullYear(),
+                end: new Date().getFullYear()+1,
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    $scheduledTime.html(result[0]+"-"+(parseInt(result[1])+1)+"-"+result[2]);
+                }
+            });
+        });
+        $('#showPicker').on('click', function () {
+            weui.picker([{
+                label: '飞机票',
+                value: 0
+            }, {
+                label: '火车票',
+                value: 1
+            }, {
+                label: '的士票',
+                value: 2
+            },{
+                label: '公交票 (disabled)',
+                disabled: true,
+                value: 3
+            }, {
+                label: '其他',
+                value: 4
+            }], {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    console.log(result);
+                }
+            });
+        });
+        // add car
+        var $btnScheduled = $('#btnScheduled'),
+                $scheduledTime = $('#scheduledTime'),
+                $telInput = $('#telInput'),
+                $carNumInput = $('#carNumInput');
+
+        $btnScheduled.on('click', function(){
+            var time = $scheduledTime.html();
+            var tel = $telInput.val();
+            var carNum = $carNumInput.val();
+            if(!(/^1[34578]\d{9}$/.test(tel))){
+                showTips('手机号格式不正确');
+                return false;
+            }
+            if(!new RegExp("^[a-zA-Z0-9\u4E00-\u9FA5]{7,10}$").test(carNum)){
+                showTips('车牌号格式不正确');
+                return false;
+            }
+            // Dialog
+            var $iosDialog = $('#iosDialog'),
+                    $androidDialog = $('#androidDialog');
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf('android') != -1;
+            if(isAndroid) {
+                $androidDialog.fadeIn(200);
+            } else {
+                $iosDialog.fadeIn(200);
+            }
+            $('#dialogs').on('click', '.weui-dialog__btn', function(){
+                $(this).parents('.js_dialog').fadeOut(200);
+            });
+        });
+
+        function showTips(html) {
+            $('.js_tooltips').html(html);
+            $('.js_tooltips').show();
+            setTimeout(function (){
+                $('.js_tooltips').hide();
+            }, 1000);
+        }
+    });
+</script>
 </body>
 </html>

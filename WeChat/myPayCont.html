@@ -3,62 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>消费详情</title>
-    <link rel="stylesheet" href="css/weui.min.css"/>
+    <title>交易明细</title>
+    <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .weui_cell_primary {
-            color: #888;
+        .car-park {
+            position: relative;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #D9D9D9;
+            text-align: center;
+            line-height: 2em;
+            left: 5%;
+            width: 90%;
+            font-size: 18px;
         }
-        .weui_cell_ft {
-            color: #000;
+        .weui-form-preview__bd {
+            padding: 20px 30px;
+            font-size: 16px;
+        }
+        .weui-form-preview__value {
+            color: black;
+        }
+        .weui-form-preview__hd:after {
+            margin-right: 15px;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui_panel_bd">
-        <div class="weui_cell">
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>实际支付</p>
-            </div>
-            <div class="weui_cell_ft" style="font-size: 34px;">12.80元</div>
+    <div class="weui-form-preview">
+        <div class="car-park">
+            <span>海康威视二期停车场</span>
         </div>
-        <div class="weui_cells" style="margin-top: 0">
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>优惠</p>
-                </div>
-                <div class="weui_cell_ft">抵扣10元</div>
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item" style="text-align: center;font-size: larger;">
+                <em class="weui-form-preview__value" >¥12.80</em>
             </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>车牌号</p>
-                </div>
-                <div class="weui_cell_ft">浙AJ268V</div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">车牌号码</label>
+                <span class="weui-form-preview__value">浙A J268V</span>
             </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>总费用</p>
-                </div>
-                <div class="weui_cell_ft">20.80元</div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">入场时间</label>
+                <span class="weui-form-preview__value">2016/07/13 09:45:18</span>
             </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>时长</p>
-                </div>
-                <div class="weui_cell_ft">8小时32分钟</div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">卡号</label>
+                <span class="weui-form-preview__value">23874662788090</span>
             </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>入场时间</p>
-                </div>
-                <div class="weui_cell_ft">2016/07/13 09:45:18</div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">时长</label>
+                <span class="weui-form-preview__value">3.7小时</span>
             </div>
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>停车场</p>
-                </div>
-                <div class="weui_cell_ft">海康停车场</div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">总费用</label>
+                <span class="weui-form-preview__value">¥22.80</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">已优惠</label>
+                <span class="weui-form-preview__value">-¥10.00</span>
             </div>
         </div>
     </div>
