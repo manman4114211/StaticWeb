@@ -6,27 +6,54 @@
     <title>预约车位</title>
     <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .container {
-            font-family: "微软雅黑", "STXihei", sans-serif;
-        }
         .title {
-            font-size: 20px;
+            font-size: 22px;
+            color: #4d4d4d;
+            line-height: 32px;
+            padding-bottom: 10px;
         }
-        .summary {
-            font-size: 13px;
-            color: #888888;
+        .empty-parking {
+            float: left;
+            font-size: 15px;
+            margin-right: 8px;
+            background-color: #edfae0;
+            padding: 4px;
+            border: 1px solid #edfae0;
+            border-radius: 2px;
+            color: #9cad72;
         }
-        .charge_rule {
+        .parking-space {
+            float: left;
+            font-size: 15px;
+            background-color: #ddf2ff;
+            padding: 4px;
+            border: 1px solid #ddf2ff;
+            border-radius: 2px;
+            color: #63a8d3;
+        }
+        #emptyNum {
+            color: #567212;
+        }
+        #totalNum {
+            color: #22628a;
+        }
+        .charge-rule {
             float: right;
-            display: inline-block;
-            color: #10aeff;
+            color: #bad2e1;
             font-size: 16px;
-            padding-top: 25px;
+            padding-top: 40px;
+        }
+        .weui-label {
+            color: #999999;
+        }
+        .weui-input {
+            color: #4d4d4d;
         }
         .weui-time {
             float: right;
             line-height: 44px;
             padding-right: 30px;
+            padding-left: 10px;
         }
         .btn-scheduled {
             margin: 30px 20px;
@@ -35,36 +62,37 @@
 </head>
 <body ontouchstart>
 <div class="container" id="container">
-    <div class="weui-cells weui-piece_shadow" style="margin-top: 0;padding: 10px 5px;">
+    <div class="weui-cells" style="margin-top: 0;padding: 5px;">
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <p class="title">海康二期停车场</p>
-                <p class="summary">198个空车位，共300个停车位</p>
+                <p class="empty-parking">空车位：<span id="emptyNum">198</span></p>
+                <p class="parking-space">总车位：<span id="totalNum">350</span></p>
             </div>
-            <a href="payRule.html" class="charge_rule">收费规则</a>
+            <a href="payRule.html" class="charge-rule">收费规则</a>
         </div>
     </div>
-    <div class="weui-cells weui-piece_shadow">
+    <div class="weui-cells">
         <div class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
                 <label class="weui-label">预约时间</label>
             </div>
             <div class="weui-cell__bd" id="showDatePicker">
-                <label class="weui-time" id="scheduledTime">今天 12:20</label>
+                <label class="weui-time" id="scheduledTime" style="color: #4d4d4d;">今天 12:20</label>
             </div>
         </div>
     </div>
-    <div class="weui-cells weui-piece_shadow">
+    <div class="weui-cells">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="datetime-local" placeholder="请输入手机号" value="" id="telInput">
+                <input class="weui-input" type="tel" placeholder="请输入手机号" value="" id="telInput">
             </div>
         </div>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">车牌号</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="输入车牌号，例如浙A12345" value="" id="carNumInput">
+                <input class="weui-input" type="text" placeholder="输入车牌号，例如浙A12345" value="浙A940SB" id="carNumInput">
             </div>
         </div>
     </div>
@@ -116,28 +144,27 @@
             });
         });
         $('#showPicker').on('click', function () {
-            weui.picker([{
-                label: '飞机票',
-                value: 0
-            }, {
-                label: '火车票',
-                value: 1
-            }, {
-                label: '的士票',
-                value: 2
-            },{
-                label: '公交票 (disabled)',
-                disabled: true,
-                value: 3
-            }, {
-                label: '其他',
-                value: 4
-            }], {
+            var _time = [];
+            var fmtStr = function(str) {
+                if(str.length == 1)
+                    str = '0'+str;
+                return str;
+            }
+            for(var i=0; i<=23; i++) {
+                for(var j=0; j<=59; j+=5){
+                    var t = {
+                        label: fmtStr(i+'')+":"+fmtStr(j+''),
+                        value: fmtStr(i+'')+":"+fmtStr(j+'')
+                    };
+                    _time.push(t);
+                }
+            }
+            weui.picker(_time,{
                 onChange: function (result) {
-                    console.log(result);
+
                 },
                 onConfirm: function (result) {
-                    console.log(result);
+                    $('#showPicker').append(result);
                 }
             });
         });

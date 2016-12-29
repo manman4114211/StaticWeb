@@ -6,54 +6,108 @@
     <title>收费规则</title>
     <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .container {
-            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
+        .weui-navbar__item.weui-bar__item_on {
+            color: #333;
+            background-color: white;
+            border-bottom: 3px solid #00a0e9;
         }
-        .rule__title {
-            text-align: left;
-            font-size: 17px;
-            font-weight: bold;
-            padding-left: 30px;
-            padding-top: 20px;
-        }
-        .weui-form-preview__label {
-            margin-right: 0;
-            color: black;
-        }
-        .weui-form-preview__value {
-            text-align: left;
-            color: black;
+        .weui-navbar__item {
+            color: #999;
+            padding: 12px 0;
+            font-size: 16px;
+            background-color: white;
         }
         .weui-navbar__item:after {
             border: 0;
         }
         .weui-tab__panel {
+            background-color: white;
+        }
+        .weui-tab__panel:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 58px;
+            right: 0;
+            height: 1px;
+            border-top: 1px solid #CCCCCC;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+        .weui-tab__panel:after {
+            content: " ";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 1px;
+            border-bottom: 1px solid #CCCCCC;
+            -webkit-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+        .weui-navbar {
             position: relative;
-            top: 50px;
-            background-color: white;
+            margin-bottom: 7px;
         }
-        .weui-navbar__item {
-            color: grey;
-            padding: 12px 0;
-            font-size: 16px;
-            background-color: white;
+        .rule:after {
+            content: " ";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 1px;
+            border-bottom: 1px solid #CCCCCC;
+            -webkit-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
         }
-        .weui-navbar__item.weui-bar__item_on {
-            color: black;
-            background-color: white;
-            border-bottom: 3px solid #02a5f9;
+        .rule__title {
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            padding-left: 30px;
         }
         .weui-form-preview__bd {
             padding: 20px 30px;
             font-size: 16px;
+            color: #333;
+        }
+        .weui-form-preview__label {
+            margin-right: 0;
+            color: #333;
+        }
+        .weui-form-preview__value {
+            text-align: left;
+        }
+        .js-definedPeriod-list {
+            font-size: small;
+            text-align: left;
+        }
+        .js-definedPeriod-list li:nth-child(odd) {
+            background: #eee;
+        }
+        .js-definedPeriod-list li {
+            overflow: hidden;
+            padding: 5px 15px;
+            border-left: 1px solid #CCCCCC;
+            border-right: 1px solid #CCCCCC;
+            border-bottom: 1px solid #CCCCCC;
+        }
+        .js-definedPeriod-list li:first-child {
+            border-top: 1px solid #CCCCCC;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
     <div class="page__hd" style="height: 100%;display: none;">
-        <div class="rule" style="background-color: white;">
-            <h1 class="rule__title">按单位时段收费</h1>
+        <div class="rule" style="background-color: white;padding-top: 20px;">
+            <h1 class="rule__title" style="border-left: 3px solid #00A0E9;">按单位时段收费</h1>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">免费停车时长：</label>
@@ -88,12 +142,13 @@
     </div>
     <div class="page__bd" style="height: 100%;display: none;">
         <div class="weui-tab">
-            <div class="weui-navbar weui-piece_shadow">
+            <div class="weui-navbar">
                 <div class="weui-navbar__item weui-bar__item_on" id="small">小型车辆</div>
-                <div class="weui-navbar__item" id="medium">中型车辆</div>
                 <div class="weui-navbar__item" id="large">大型车辆</div>
+                <div class="weui-navbar__item" id="other">其它</div>
+                <div class="weui-navbar__item" id="any">不分类型</div>
             </div>
-            <div class="weui-tab__panel weui-piece_shadow" style="padding-top: 0;">
+            <div class="weui-tab__panel" style="padding-top: 20px;">
                 <div class="rule small">
                     <h1 class="rule__title">按单位时段收费</h1>
                     <div class="weui-form-preview__bd">
@@ -105,6 +160,22 @@
                             <label class="weui-form-preview__label">收费时段：</label>
                             <span class="weui-form-preview__value">全天</span>
                         </div>
+
+                        <ul class="js-definedPeriod-list">
+                            <li>
+                                <p>收费时段：0:00:00-5:00:00</p>
+                                <p>收费单位：300分钟</p>
+                                <p>收费金额：10元</p>
+                                <p>最小跨度时间：60分钟</p>
+                            </li>
+                            <li>
+                                <p>收费时段：5:00:00-23:59:00</p>
+                                <p>收费单位：60分钟</p>
+                                <p>收费金额：5元</p>
+                                <p>最小跨度时间：30分钟</p>
+                            </li>
+                        </ul>
+
                         <div class="weui-form-preview__item">
                             <label class="weui-form-preview__label">首段收费时长：</label>
                             <span class="weui-form-preview__value">15分钟</span>
@@ -124,31 +195,6 @@
                         <div class="weui-form-preview__item">
                             <label class="weui-form-preview__label">每日封顶金额：</label>
                             <span class="weui-form-preview__value">无</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="rule medium" style="display: none">
-                    <h1 class="rule__title">按总计时长收费</h1>
-                    <div class="weui-form-preview__bd">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">0-30分钟：</label>
-                            <span class="weui-form-preview__value">0元</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">30-240分钟：</label>
-                            <span class="weui-form-preview__value">5元</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">240-480分钟：</label>
-                            <span class="weui-form-preview__value">10元</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">480-720分钟：</label>
-                            <span class="weui-form-preview__value">15元</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">720-1440分钟：</label>
-                            <span class="weui-form-preview__value">50元</span>
                         </div>
                     </div>
                 </div>
@@ -172,6 +218,40 @@
                         <div class="weui-form-preview__item">
                             <label class="weui-form-preview__label">每次收费金额：</label>
                             <span class="weui-form-preview__value">40元</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rule other" style="display: none">
+                    <h1 class="rule__title">按总计时长收费</h1>
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">0-30分钟：</label>
+                            <span class="weui-form-preview__value">0元</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rule any" style="display: none">
+                    <h1 class="rule__title">按总计时长收费</h1>
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">0-30分钟：</label>
+                            <span class="weui-form-preview__value">0元</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">30-240分钟：</label>
+                            <span class="weui-form-preview__value">5元</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">240-480分钟：</label>
+                            <span class="weui-form-preview__value">10元</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">480-720分钟：</label>
+                            <span class="weui-form-preview__value">15元</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">720-1440分钟：</label>
+                            <span class="weui-form-preview__value">50元</span>
                         </div>
                     </div>
                 </div>

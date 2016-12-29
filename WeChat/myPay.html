@@ -88,19 +88,8 @@
 <script src="js/zepto.min.js"></script>
 <script>
     $(function() {
-        $(document.body).on('click',function(e) {
-            var el = $(e.target);
-
-            if(el.hasClass('weui_panel_ft')){
-                var html = $(".weui_panel_bd").html();
-                $(".weui_panel_bd").append(html);
-            }
-
-            if(el.parents('div').hasClass('weui-panel')) {
-                var transactionInfo = el.parents('.weui-panel');
-                var carNum = transactionInfo.children('.weui-panel__bd').find('p').html();
-                location.href = 'myPayCont.html?carNum=' + carNum;
-            }
+        $('.weui-panel').on('click',function() {
+            location.href = 'myPayCont.html';
         });
     });
 </script>

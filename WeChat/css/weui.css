@@ -2360,8 +2360,5 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .weui-btn_gradient {
   font-size: 16px;
-  margin-top: 10px;
-  margin-bottom: -10px;
-  background: linear-gradient(to right, #66caf1, #03a7f5);
-  font-family: "微软雅黑", "Helvetica Neue", sans-serif;
+  background: linear-gradient(to right, #29a4ff, #0093ff);
 }

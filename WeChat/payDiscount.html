@@ -10,7 +10,7 @@
             margin-top: 0;
         }
         .weui-input {
-            font-size: 14px;
+            font-size: 16px;
             margin-left: 10px;
         }
         .weui-cell__bd {
@@ -23,21 +23,23 @@
             display: block;
             width: 24px;
             height: 24px;
-            background: url(images/icon_scan.png) no-repeat;
+            background: url(images/icon_main.png) no-repeat -4px -160px;
         }
     </style>
 </head>
 <body>
-<div class="weui-cells weui-piece_shadow">
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="请输入优惠券号">
-            <a href="javascript:" class="scan-code" id="scan-code"></a>
+<div class="container" id="container">
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请输入优惠券号">
+                <a href="javascript:" class="scan-code" id="scan-code"></a>
+            </div>
         </div>
     </div>
-</div>
-<div class="weui-form-preview__bd">
-<a href="javascript:;" class="weui-btn weui-btn_gradient">确定</a>
+    <div class="weui-form-preview__bd">
+        <a href="javascript:;" class="weui-btn weui-btn_gradient">确定</a>
     </div>
+</div>
 </body>
 </html>

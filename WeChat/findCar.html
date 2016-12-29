@@ -10,12 +10,12 @@
             display: none;
             color: dodgerblue;
             position: absolute;
-            top: 4px;
+            top: 3px;
             right: 0;
             padding: 0 8px;
             line-height: 20px;
             border-left: 1px lightgray solid;
-            font: 15px Microsoft YaHei;
+            font-size: 15px;
         }
         .form-border {
             border: 1px #efeff4 solid;
@@ -26,36 +26,44 @@
             border-radius:6px;
         }
         .weui-cell__bd {
-            font: 15px Microsoft YaHei;
+            font-size: 16px;
+            color: #333333;
             margin-left: 6px;
         }
         .default_car {
-            font-size: small;
-            color: #BBB;
-            margin-right: 10px;
+            font-size: 14px;
+            color: #999999;
+        }
+        .weui-cell {
+            padding: 10px 25px;
         }
         .weui-cell:before {
-            right: 20px;
+            right: 25px;
+            left: 25px;
+            border-top: 1px dotted #d9d9d9;
+        }
+        .weui-cell:nth-child(2):before {
+            border: 0;
         }
         .binding_cars {
-            margin-top: 15px;
-            margin-bottom: 5px;
+            padding-top: 15px;
             padding-left: 15px;
-            padding-right: 15px;
-            color: #999;
+            color: #999999;
             font-size: 14px;
-        }
-        .weui-cell_access:nth-child(2):before {
-            border-top-color: dodgerblue;
         }
         .weui-media-box_appmsg .weui-media-box__hd {
             width: 150px;
-            height: 90px;
+            height: 100%;
             margin-right: 20px;
-            margin-left: 10px;
         }
         .weui-media-box {
             padding: 8px;
+            margin: 10px;
+            border: 1px solid #e5e5e5;
+            background-color: #ffffff;
+        }
+        .weui-media-box:before {
+            border: 0px;
         }
         .weui-media-box__desc {
             font-size: 15px;
@@ -64,18 +72,60 @@
         .searchbar-result {
             margin-top: 10px;
         }
-        .weui-media-box__noCar .weui-media-box__thumb {
-            margin-left: 10%;
-            width: 80%;
-        }
         .no-result-tips {
             text-align: center;
-            color: black;
+            color: #333;
+            font-size: 14px;
         }
         .clear-history {
-            color: #999;
+            color: #e65f5f;
             font-size: 14px;
             margin: auto;
+        }
+        .page__ft_bg {
+            position: fixed;
+            top: 50px;
+            right: 5%;
+            left: 0;
+            bottom: 0;
+            background: url("images/find_car_bg.png") no-repeat center;
+            background-size: 100% ;
+        }
+        .weui-cell__hd {
+            background: url("images/icon_main.png") no-repeat;
+        }
+        #carBinding .weui-cell__hd {
+            height: 16px;
+            width: 26px;
+            background-position: -3px -60px;
+        }
+        #searchHistory .weui-cell__hd {
+            height: 21px;
+            width: 21px;
+            background-position: -58px -57px;
+        }
+        .weui-media-box__noCar {
+            position: fixed;
+            top: 50px;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+        .no-result-img {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 50%;
+            background: url("images/no_plate_no_bg.png") no-repeat center 95%;
+            background-size: 60% ;
+        }
+        .no-result-tips {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            left: 0;
+            bottom: 0;
         }
     </style>
 </head>
@@ -88,39 +138,54 @@
                 <form class="weui-search-bar__form form-border">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search"></i>
-                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="输入车牌中连续的3位数字/字母" required="" autofocus>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="输入车牌中连续的3位数字/字母" required autofocus>
                         <a href="javascript:" class="weui-icon-clear" id="searchClear" style="right: 40px;margin-right: 6px;"></a>
                         <a href="javascript:" class="search-text-btn" id="searchText">搜索</a>
                     </div>
                 </form>
             </div>
             <div class="weui-cells searchbar-result" id="carBinding">
-                <div class="binding_cars">绑定车辆</div>
+                <div class="binding_cars">绑定车牌</div>
                 <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <img src="" alt="">
+                    </div>
                     <div class="weui-cell__bd weui-cell_primary">
                         <p>浙A94SB0</p>
                     </div>
                     <div class="default_car">默认固定车辆</div>
                 </div>
                 <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <img src="" alt="">
+                    </div>
                     <div class="weui-cell__bd weui-cell_primary">
                         <p>沪C325V1</p>
                     </div>
                 </div>
             </div>
-             <div class="weui-cells searchbar-result" id="searchHistory">
+            <div class="weui-cells searchbar-result" id="searchHistory">
                 <div class="binding_cars">搜索历史</div>
                 <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <img src="" alt="">
+                    </div>
                     <div class="weui-cell__bd weui-cell_primary">
                         <p>268</p>
                     </div>
                 </div>
                 <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <img src="" alt="">
+                    </div>
                     <div class="weui-cell__bd weui-cell_primary">
                         <p>139</p>
                     </div>
                 </div>
                 <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <img src="" alt="">
+                    </div>
                     <div class="weui-cell__bd weui-cell_primary">
                         <p>187</p>
                     </div>
@@ -131,11 +196,11 @@
                     </div>
                 </div>
             </div>
-            <div class="weui-cells searchbar-result" id="searchResult" style="display: none;">
+            <div class="searchbar-result" id="searchResult" style="display: none;">
                 <div class="weui-panel__bd">
                     <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                            <img class="weui-media-box__thumb" src="images/small_car_default.png" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">浙A96SB0</h4>
@@ -145,7 +210,7 @@
                     </a>
                     <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                            <img class="weui-media-box__thumb" src="images/small_car_default.png" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">浙A95SB0</h4>
@@ -155,7 +220,7 @@
                     </a>
                     <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                            <img class="weui-media-box__thumb" src="images/small_car_default.png" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">浙A95SB0</h4>
@@ -165,7 +230,7 @@
                     </a>
                     <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="images/sample_car.png" alt="">
+                            <img class="weui-media-box__thumb" src="images/small_car_default.png" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">浙A95SB0</h4>
@@ -175,19 +240,16 @@
                     </a>
                 </div>
             </div>
-            <div class="weui-cells searchbar-result" id="searchNoResult" style="display: none;">
-                <div class="weui-panel__bd">
-                    <div class="weui-media-box weui-media-box_text">
-                        <div class="weui-media-box__noCar">
-                            <img class="weui-media-box__thumb" src="images/no_result.png" alt="">
-                        </div>
-                        <p class="weui-media-box__desc no-result-tips">没有匹配到车牌号</p>
-                        <p class="weui-media-box__desc no-result-tips">建议联系商场保安或直接拨打电话0371-58479654</p>
-                    </div>
+            <div class="weui-media-box__noCar" id="searchNoResult" style="display: none;">
+                <div class="no-result-img">
+                </div>
+                <div class="no-result-tips">
+                    <p>没有匹配到车牌号</p>
+                    <p>建议联系商场保安或直接拨打电话<a href="tel:13849118300" style="color: #006DE8">0571-XXXX XXX</a></p>
                 </div>
             </div>
         </div>
-        <div class="page__ft"></div>
+        <div class="page__ft page__ft_bg"></div>
     </div>
 </div>
 <div id="loadingToast" style="opacity: 0; display: none;">
@@ -228,6 +290,10 @@
                 $carBinding = $('#carBinding'),
                 $searchHistory = $('#searchHistory'),
                 $searchClear = $('#searchClear');
+
+        if($searchHistory.length && $carBinding.length){
+            $('.page__ft').removeClass('page__ft_bg');
+        }
 
         $searchInput.on('input', function(){
             if(this.value.length) {
@@ -300,7 +366,7 @@
         });
         //
         $('.clear-history').click(function(){
-            $searchHistory.remove()
+            $searchHistory.remove();
         });
     });
 </script>

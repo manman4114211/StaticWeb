@@ -6,46 +6,44 @@
     <title>我的车辆</title>
     <link rel="stylesheet" href="css/weui.css"/>
     <style>
-        .container {
-            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
-        }
-        .weui-input {
-            font-size: 16px;
-        }
         .btn_car-add {
-            font-size: 15px;
-            color: #06a5f7;
+            font-size: 16px;
+            color: #0075d9;
         }
-        .default_car {
-            color: #06a5f7;
-            font-size: 17px;
+        .default_car .weui-cell__bd {
+            color: #3e97eb;
         }
         .default_icon {
             font-size: small;
-            color: #BBB;
+            color: #b3b3b3;
+        }
+        .weui-cell__bd {
+            color: #808080;
         }
         .car-list {
-            border-left: 1px solid #ECECEC;
-            border-right: 1px solid #ECECEC;
-            margin: 20px;
+            border-left: 1px solid #e5e5e5;
+            border-right: 1px solid #e5e5e5;
+            margin: 15px 20px;
         }
         .weui-cell {
             padding: 10px 25px;
+        }
+        .page__hd .weui-cells:nth-child(1):before {
+            border: 0;
         }
         .weui-cell:before {
             right: 15px;
         }
         .weui-actionsheet__cell {
-            font-size: 14px;
-            font-family: "微软雅黑", "Helvetica Neue", sans-serif;
+            font-size: 16px;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
     <div class="page">
-        <div class="page__bd">
-            <div class="weui-cells weui-piece_shadow">
+        <div class="page__hd">
+            <div class="weui-cells" style="margin-top: 0;">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" placeholder="输入车牌号，例如浙A12345" value="" autofocus id="addInput"/>
@@ -55,7 +53,7 @@
             </div>
         </div>
         <div class="page__bd">
-            <div class="weui-cells car-list weui-piece_shadow" id="carList">
+            <div class="weui-cells car-list" id="carList">
                 <div class="weui-cell default_car">
                     <div class="weui-cell__bd">
                         <p>浙A940SB</p>
@@ -75,11 +73,11 @@
 <div class="weui-mask" id="iosMask" style="display: none"></div>
 <div class="weui-actionsheet" id="iosActionsheet">
     <div class="weui-actionsheet__menu">
-        <div class="weui-actionsheet__cell" id="setDefault">设为默认车牌</div>
-        <div class="weui-actionsheet__cell" id="deleteCar">删除</div>
+        <div class="weui-actionsheet__cell" style="color: #000000;" id="setDefault">设为默认车牌</div>
+        <div class="weui-actionsheet__cell" style="color: #e65f5f;" id="deleteCar">删除</div>
     </div>
     <div class="weui-actionsheet__action">
-        <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
+        <div class="weui-actionsheet__cell" style="color: #333333;" id="iosActionsheetCancel">取消</div>
     </div>
 </div>
 
