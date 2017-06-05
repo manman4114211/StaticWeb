@@ -11,22 +11,27 @@
         }
         .weui-cell__hd {
             position: relative;
+            margin-left: 10px;
             margin-right: 20px;
         }
         .weui-cell__hd img {
-            width: 80px;
+            width: 65px;
             display: block
         }
+        .title {
+            font-size: 14px;
+        }
         .describe {
-            font-size: 13px;
+            font-size: 12px;
             color: #888888;
             margin-top: 10px;
         }
         .weui-cells {
-            margin: 0 8% 25px;
+            margin: 0 20px 25px;
+            border-radius:0 0 4px 4px;
         }
         .weui-cell {
-            padding: 30px 30px;
+            padding: 25px 30px;
         }
         .weui-cells:after,.weui-cells:before,.weui-cell:before {
             border: 0;
@@ -34,70 +39,72 @@
         .weui-cell:after {
             content: " ";
             position: absolute;
-            left: 25px;
+            left: 15px;
             top: 100%;
-            right: 25px;
+            right: 15px;
             height: 2px;
-            background: url(images/home_page/parting_line-icon.png) no-repeat center;
+            background: url(./images/home_page/parting_line-icon.png) no-repeat;
+            background-size: 100%;
         }
         .foot img{
             width: 100%;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body ontouchstart>
 <div class="weui-cells">
-    <div class="weui-cell">
+    <div class="weui-cell" data-route="findCar">
         <div class="weui-cell__hd">
             <img src="images/home_page/find_car-icon.png">
         </div>
         <div class="weui-cell__bd">
-            <p>找车路线</p>
+            <p class="title">找车路线</p>
             <p class="describe">我是描述文字我是描述文字我是描</p>
         </div>
     </div>
-    <div class="weui-cell">
+    <div class="weui-cell" data-route="payFeeCont">
         <div class="weui-cell__hd">
             <img src="images/home_page/pay_fee-icon.png">
         </div>
         <div class="weui-cell__bd">
-            <p>缴费</p>
+            <p class="title">缴费</p>
             <p class="describe">我是描述文字我是描述文字我是描</p>
         </div>
     </div>
-    <div class="weui-cell">
+    <div class="weui-cell" data-route="allParkInfo">
         <div class="weui-cell__hd">
             <img src="images/home_page/order_place-icon.png">
         </div>
         <div class="weui-cell__bd">
-            <p>预定车位</p>
+            <p class="title">预定车位</p>
             <p class="describe">我是描述文字我是描述文字我是描</p>
         </div>
     </div>
-    <div class="weui-cell">
+    <div class="weui-cell" data-route="myPay">
         <div class="weui-cell__hd">
             <img src="images/home_page/fee_record-icon.png">
         </div>
         <div class="weui-cell__bd">
-            <p>交易记录</p>
+            <p class="title">交易记录</p>
             <p class="describe">我是描述文字我是描述文字我是描</p>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <img src="images/home_page/my_car-icon.png">
-        </div>
-        <div class="weui-cell__bd">
-            <p>我的车辆</p>
-            <p class="describe">我是描述文字我是描述文字我是描</p>
-        </div>
-    </div>
-    <div class="weui-cell">
+    <div class="weui-cell" data-route="myAppoint">
         <div class="weui-cell__hd">
             <img src="images/home_page/my_appoint-icon.png">
         </div>
         <div class="weui-cell__bd">
-            <p>我的预定</p>
+            <p class="title">我的预定</p>
+            <p class="describe">我是描述文字我是描述文字我是描</p>
+        </div>
+    </div>
+    <div class="weui-cell" data-route="myCar">
+        <div class="weui-cell__hd">
+            <img src="images/home_page/my_car-icon.png">
+        </div>
+        <div class="weui-cell__bd">
+            <p class="title">我的车辆</p>
             <p class="describe">我是描述文字我是描述文字我是描</p>
         </div>
     </div>
@@ -108,7 +115,19 @@
 <script src="js/zepto.min.js"></script>
 <script>
     $(function() {
-
+        var authUrl = "$routeProvider.html";
+        $('.weui-cell').on('click', function(e){
+            var el = $(e.target);
+            var route;
+            if(el.hasClass('weui-cell')){
+                route = el.attr("data-route");
+            } else if(el.parents('weui-cell')) {
+                route = el.parents('.weui-cell').attr("data-route");
+            }
+            if(route){
+                window.location.href=authUrl.replace("$routeProvider", route);
+            }
+        });
     });
 </script>
 </body>
