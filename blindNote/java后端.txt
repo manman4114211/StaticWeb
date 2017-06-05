@@ -1,0 +1,95 @@
+
+String requestUrl = request.getRequestURL().toString();//得到请求的URL地址
+String requestUri = request.getRequestURI();//得到请求的资源
+String queryString = request.getQueryString();//得到请求的URL地址中附带的参数
+String remoteAddr = request.getRemoteAddr();//得到来访者的IP地址
+String remoteHost = request.getRemoteHost();
+String remotePort = request.getRemotePort();
+String remoteUser = request.getRemoteUser();
+String method = request.getMethod();//得到请求URL地址时使用的方法
+String pathInfo = request.getPathInfo();
+String localAddr = request.getLocalAddr();//获取WEB服务器的IP地址
+String localName = request.getLocalName();//获取WEB服务器的主机名
+Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+for(Cookie cookie : cookies){
+	System.err.println(cookie.getName() + "->" + cookie.getValue());
+}
+
+
+@RequestMapping("testRequestParam")  
+public String filesUpload(@RequestParam(value="aa", required=true) String inputStr) {}
+@RequestParam 注解是很常用
+  * @RequestParam 来映射请求参数
+  * value 即请求参数名
+  * required 该参数是否必需。默认为true
+  * defaultValue 请求参数的默认值
+// required=false 表示不传的话，会给参数赋值为null，required=true就是必须要传参
+// 参数是int基本类型，如果不传参数值 required=false 也会报错，因为会赋值为null给int，这个不可以
+// 建议使用包装类型代替基本类型，如使用Integer代替int
+
+
+@XmlElement将java对象的属性映射为xml的节点，可通过name属性改变java对象属性在xml中显示的名称，如：@XmlElement(name="Name")。
+@XmlTransient用于标示在由java对象映射xml时，忽略此属性。即，在生成的xml文件中不出现此元素。
+
+
+小数去 .0（10.0-->10）
+  new BigDecimal(output).stripTrailingZeros()
+
+
+request.getParameter("val_1");是从表单中获取数据的
+request.getAttribute("val_1");是你把VAL_1设置成参数进行传递
+
+
+HashMap不能由get()方法来判断否存在某个键，而应该用containsKey()方法来判断；
+
+
+JSON中get()和opt()的区别:
+  get()取值不正确会抛出异常，必须用try catch或者throw包起
+  opt()取值不正确则会试图进行转化或者输出友好值，不会抛出异常
+  
+  put()将value映射到key下。
+	如果此JSONObject对象之前存在一个value在这个key下，当前的value会替换掉之前的value
+  accumulate()累积value到这个key下。
+	如果当前已经存在一个value在这个key下，那么一个Array将会存储在这个key下，来保存所有累积的value。
+  element()将键/值对放到这个JSONObject对象里面。
+	如果当前value为空("key", null)，那么如果这个key存在的话，这个key就会移除掉。
+	如果此JSONObject对象之前没有一个value在这个key下，那么此方法会调用put()方法。
+	如果此JSONObject对象之前存在一个value在这个key下，那么此方法会调用accumulate()方法。
+  
+  
+Java的String类型有特殊的处理：所有编译期认识的字符串，都会被放到常量池
+i++和++i其实都是先＋1，再赋值。++i，没什么好说的；i++,以j=i++;为例在底层的实现是：temp = i;i = i + 1; j = temp; 所以，i=15;i=i++;这个表达式的结果是15.
+当==或!=运算符的两个操作数的类型一个是基本数据类型，另一个是包装类引用类型时，将引用类型拆箱转换为基本数据类型，然后比较两个基本数据类型的值是否相等。
+
+
+JUnit4注解解释
+1. @Test : 测试方法，测试程序会运行的方法，后边可以跟参数代表不同的测试，如(expected=XXException.class) 异常测试，(timeout=xxx)超时测试
+2. @Ignore : 被忽略的测试方法
+3. @Before: 每一个测试方法之前运行
+4. @After : 每一个测试方法之后运行
+5. @BeforeClass: 所有测试开始之前运行
+6. @AfterClass: 所有测试结束之后运行
+fail方法是指测试失败
+assertEquals测试2个参数是否相等，具体参考相应API
+
+
+Java设置session超时（失效）的三种方式
+  1. 在web容器中设置（此处以tomcat为例）
+    <session-config>
+      <session-timeout>30</session-timeout> 
+    </session-config>
+    Tomcat默认session超时时间为30分钟，可以根据需要修改，负数或0为不限制session失效时间。
+  2.在工程的web.xml中设置
+    <session-config>
+      <session-timeout>15</session-timeout>
+    </session-config>
+  3.通过Java代码设置
+    session.setMaxInactiveInterval（30*60）;//以秒为单位
+三种方式优先级：1 < 2 < 3
+
+
+static关键字有哪些作用：
+  如果你答出static修饰变量、修饰方法我会认为你合格，
+  答出静态块，我会认为你不错，
+  答出静态内部类我会认为你很好，
+  答出静态导包我会对你很满意，因为能看出你非常热衷研究技术。

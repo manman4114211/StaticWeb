@@ -1,0 +1,26 @@
+spring中<tx:advice></tx:advice>意义
+  <tx:advice id="tv" transaction-manager="transactionManager">
+	<tx:attributes>
+	  <tx:method name="save*" propagation="REQUIRED"/>
+	</tx:attributes>
+  </tx:advice>
+这段话是什么意思？
+
+意思是这个事务advice的管理者为transactionManager，你从配置文件中应该能够找到一个ID为transactionManager的bean，而这个建议中规定了save方法的传输方式为required,也就是说没有sessionfactory的时候会自动建立，有的时候就不会建立了。
+当然了这只是规定了一个advice，你还需要指定一个aop:pointcut去引用他，例如
+  <!-- 配置切面，把事务控制在Service层-->
+  <aop:config>
+	<aop:pointcut id="bussinessService" expression="execution(* *..service*..*(..))" />
+	<aop:advisor pointcut-ref="bussinessService" advice-ref="tv" />
+  </aop:config>
+这样这个advice就被联系到了bussinessService这个切面pointcut上了
+
+
+另外：(* com.evan.crm.service.*.*(..))中几个通配符的含义： 
+
+|第一个 * —— 通配随便率性返回值类型| 
+|第二个 * —— 通配包com.evan.crm.service下的随便率性class| 
+|第三个 * —— 通配包com.evan.crm.service下的随便率性class的随便率性办法| 
+|第四个 .. —— 通配方法可以有0个或多个参数| 
+
+

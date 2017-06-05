@@ -1,0 +1,186 @@
+
+Content-Type 表示的是请求报文体的 MIME 类型，在 POST 和 PUT 请求中必须存在，在 GET 等请求中可以忽略此项。
+对于 HTTP 响应而言 Content-Type 是必需的
+
+
+jQuery之Ajax请求
+  function passSigleObject() {
+	var data = {
+		creId : "444",
+		createId : "5555",
+		username : "zhangsan",
+		password : "123",
+		"demoDetail.detailId" : "detailId_888",
+		"demoDetail.detailName" : "detailName_888"
+	};
+	var url = "<%=request.getContextPath()%>" + "/demo/passObject.action";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : data,
+		success : function(result, stats) {
+		}
+	});
+  }
+
+
+正则表达式中/i,/g,/ig,/gi,/m的区别和含义
+  /i (忽略大小写)
+  /g (全文查找出现的所有匹配字符)
+  /m (多行查找)
+  /gi(全文查找、忽略大小写)
+
+
+toFixed() 方法可把 Number 四舍五入为指定小数位数的数字。
+  var num = new Number(0.0099999999999);
+  num.toFixed(2) --> 0.01
+
+
+even odd
+  css3中：odd 和 even 是可用于匹配下标是奇数或偶数的子元素的关键词
+debugger;
+  console.table(animals);
+
+
+-moz代表firefox浏览器私有属性
+-ms代表IE浏览器私有属性
+-webkit代表chrome、safari私有属性
+-o代表opera私有属性
+
+
+关闭微信浏览器
+  WeixinJSBridge.call('closeWindow');
+
+
+DIV元素添加圆角边框：
+  div {
+	border:2px solid;
+	border-radius:25px;
+  }
+
+
+img图片下面出现下边距解决办法
+  给img定义vertical-align或者定义为块状。
+  最优的解决办法是：定义vertical-align，注：定义vertical-align为middle时在IE6中大概还有一像素的顶边距，最好为top或bottom。
+  还有种极端解决办法就是：将父容器的字体大小为零，font-size: 0。
+
+如何使同一个DIV中的图片、文字全部水平对齐？
+  1、图片和文字各放入独立的块级容器。然后以padding-top或margin-top来控制。
+  2、对图片添加样式vertical-align:middle;如：<div><img src="url" style="vertical-align:middle;">文字</div>
+
+
+html中的<img>的src属性取一张图片,如果取不到这张图片则默认显示另一张,怎么做?
+  src="userpic/<%=ciResult[i][22]%>" onerror="this.src='userpic/anonymity_pic.gif'"
+  加上一个onerror属性吧，，然后里面的地址就是你想替换的图片地址.
+
+
+<!--背景透明-->
+  .demo{ 
+　  background:transparent;
+　  background-color:rgba(255,255,255,0.15)<!--最后一个参数设置透明度，前面三个是RGB颜色值--> 
+  }
+<!--背景渐变-->
+  从上到下的线性渐变：
+  #grad {
+    background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */
+    background: linear-gradient(red, blue); /* 标准的语法 */
+  }
+  从左到右的线性渐变：
+  #grad {
+    background: -webkit-linear-gradient(left, red , blue); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, red, blue); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, red, blue); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, red , blue); /* 标准的语法 */
+  }
+
+
+当页面加载时，会获得焦点的一个按钮：
+  <input type="text" autofocus="autofocus">
+
+
+CSS3阴影：
+  box-shadow: 2px 8px 5px #efecec;
+
+
+/*水平翻转*/
+  .flipx {
+    -moz-transform:scaleX(-1);
+    -webkit-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1);
+    /*IE*/
+    filter:FlipH;
+  }
+/*垂直翻转*/
+  .flipy {
+    -moz-transform:scaleY(-1);
+    -webkit-transform:scaleY(-1);
+    -o-transform:scaleY(-1);
+    transform:scaleY(-1);
+    /*IE*/
+    filter:FlipV;
+  }
+
+
+jQuery选择器
+  $('#id').siblings()   当前元素所有的兄弟节点
+  $('#id').prev()       当前元素前一个兄弟节点
+  $('#id').prevaAll()   当前元素之前所有的兄弟节点
+  $('#id').next()       当前元素之后第一个兄弟节点
+  $('#id').nextAll()    当前元素之后所有的兄弟节点
+  这三个方法都可以添加选择器，给出选择条件，就能找到你指定的兄弟节点了。
+
+选择相同class的第一、二个节点
+  .weui-cell:first-child {
+    border-top-color: dodgerblue;
+  }
+  .weui-cell:nth-child(2) {
+    border-top-color: dodgerblue;
+  }
+
+
+手机端页面直接拨打电话
+  <a href="tel:10086">10086</a>
+
+
+JS 对象（Object）和字符串（String）互转
+  var str = JSON.stringify(jsObj);
+  var jsObj = JSON.parse(str);
+
+
+去掉&#65279隐藏字符解决办法
+  打开UltraEdit，在UltraEdit里打开带隐藏字符&#65279的文件，然后保存为，窗口最下面最左边有一个选项，显示默认，打开下拉条选择utf-8无BOM，然后回车，去你保存的文件位置找到，拖拽到项目里，ok 完成。
+
+
+当点击鼠标时，隐藏或显示 p 元素：适用于当前或未来的元素（比如由脚本创建的新元素）
+  $("div").delegate("button","click",function(){
+    // 通过使用滑动效果，在显示和隐藏状态之间切换
+    $("p").slideToggle();
+    // toggleClass() 对设置或移除被选元素的一个或多个类进行切换
+    $(this).toggleClass('put-away');
+  });
+
+
+字符串分割再填充
+  var dateString = '19930701';
+  var pattern = /(\d{4})(\d{2})(\d{2})/;
+  var formatedDate = dateString.replace(pattern, '$1-$2-$3');
+  console.log(formatedDate);
+
+
+angularJs用来精确浮点数，指定小数点位数.
+  在html中用法
+    {{ number_expression | number : fractionSize}}
+  在js中用法
+    $filter('number')(number, fractionSize)
+
+
+
+微信浏览器touchmove事件表现问题
+
+  我监听了微信浏览器的touchmove事件，在测试的时候发现，在ios微信上事件的表现是正常的，即滑动过程中焦点位置都可以监听到；而在android微信上，touchmove只在手指触碰的一瞬触发，类似于touchstart，请问有什么方法可以解决吗？
+
+  主要是由于200ms超时导致内核不一定会一直处理touchmove事件，一旦超时会将后续所有的事件转交给UI处理，导致touchmove不会一直触发。
+  为了解决开发者需要，建议开发者在touchstart时调用event.preventDefault，这样就可以保证内核会一起触发touchmove事件了
