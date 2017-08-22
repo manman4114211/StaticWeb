@@ -1,0 +1,99 @@
+a{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+}
+.md_panel {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 11;
+	color: #fff;
+	background: linear-gradient(to right, #0096ff, #40d2fe);
+	-webkit-user-select : none;
+}
+.md_panel a{
+	text-decoration: none;
+	color: #fff;
+}
+.md_selectarea{
+	display: inline-block;
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+.md_head{
+	height: 40px;
+	line-height: 40px;
+}
+.md_body{
+	position: relative;
+	width: 100%;
+	height: 365px;
+}
+.md_headtext{
+	display: inline-block;
+	font-size: 1.125em;
+}
+.md_prev, .md_next{
+	position: absolute;
+	top: 0;
+	font-size: 1.6em;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+}
+.md_prev{
+	left: 20%;
+}
+.md_next{
+	right: 20%;
+}
+.md_weekarea{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	overflow: hidden;
+}
+.md_weekarea li, .md_datearea li{
+	display: inline-block;
+	float: left;
+	width: 14.2857%;
+	font-weight: 400;
+	text-align: center;
+	line-height: 3.31em;
+}
+.md_datearea{
+	position: absolute;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-transition: -webkit-transform .3s linear;
+	-webkit-transform: translate(0,0);
+}
+.md_datearea li.normal{
+	background: url(bg_normal.png) no-repeat bottom;
+}
+.md_datearea li.exception{
+	background: url(bg_exception.png) no-repeat bottom;
+}
+.md_datearea li.current{
+	background: url(bg_current.png) no-repeat center;
+	background-size: contain;
+	color: #FFF;
+}
+.out_left{
+	-webkit-transform: translate(-100%,0);
+}
+.out_right{
+	-webkit-transform: translate(100%,0);
+}
+.prevdate, .nextdate{
+	color: #e6dede;
+}
+.disabled{
+	color:#C6C6C6;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta charset="UTF-8" />
+	<title>mdater</title>
+	<link rel="stylesheet" href="zepto.mdater.css">
+	<script src="zepto.js"></script>
+	<script src="zepto.mdater.js"></script>
+</head>
+<body style="margin: 0;">
+<div class="md_panel">
+	<div class="md_head">
+		<div class="md_selectarea">
+			<a class="md_prev change_month" href="javascript:;">&lt;</a>
+			<a class="md_headtext yeartag" href="javascript:;"></a>
+			<a class="md_headtext monthtag" href="javascript:;"></a>
+			<a class="md_next change_month" href="javascript:;">&gt;</a>
+		</div></div>
+	<div class="md_body">
+		<ul class="md_weekarea"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul>
+		<ul class="md_datearea in"></ul>
+	</div>
+</div>
+<input id="in" type="text" readonly style="position: fixed; top: 410px;">
+<script>
+	$('#in').mdater();
+</script>
+</body>
+</html>
