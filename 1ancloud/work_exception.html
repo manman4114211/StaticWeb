@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>异常申请</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>出勤异常</p>
+            </div>
+            <div class="weui-cell__ft"><span id="exception_day">2017/08/09</span></div>
+        </div>
+    </div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-exception_type" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>异常类型</p>
+            </div>
+            <div class="weui-cell__ft">忘打卡</div>
+        </a>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="异常原因" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="js/weui.min.js"></script>
+<script>
+    $(function() {
+        $('.j-exception_type').on('click', function () {
+            var _this = $(this);
+
+            var type = [{
+                label: '忘打卡',
+                value: 0
+            }, {
+                label: '机器故障',
+                value: 1
+            }, {
+                label: '部门调休',
+                value: 2
+            }];
+            weui.picker(type, {
+                defaultValue: [0],
+                onConfirm: function (result) {
+                    _this.find('.weui-cell__ft').html(type[result].label);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

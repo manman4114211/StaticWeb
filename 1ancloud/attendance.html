@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>我的考勤</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <link rel="stylesheet" href="dater/zepto.mdater.css">
+    <style>
+        .weui-cell_switch {
+            padding-top: 0;
+        }
+        .weui-cells {
+            margin-top: 0;
+        }
+        .weui-cells:before,.weui-cell:before,.weui-form-preview__hd:after,.weui-tabbar:before,.weui-form-preview:before,.weui-form-preview:after {
+            border: 0;
+        }
+        .weui-switch {
+            width: 32px;
+            height: 18px;
+            border-radius: 9px;
+        }
+        .weui-switch:before {
+            width: 30px;
+            height: 16px;
+            border-radius: 8px;
+        }
+        .weui-switch:after {
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
+        }
+        .weui-switch:checked:after {
+            -webkit-transform: translateX(14px);
+            transform: translateX(14px);
+        }
+        .qqq {
+            width:12px;
+            height:12px;
+            margin-right:5px;
+            display:inline-block;
+            background-color: #00CCCC;
+        }
+        .weui-cell__bd span {
+            float: right;
+            font-size: 12px;
+            color: #000;
+            margin-right: 5%;
+        }
+        .weui-form-preview__hd {
+            line-height: 16px;
+            padding-bottom: 0;
+        }
+        .weui-form-preview__label {
+            color: #000;
+        }
+        .go_to_work:before {
+            content: " ";
+            position: absolute;
+            left: 15px;
+            bottom: 46px;
+            height: 14px;
+            border-left: 4px solid #F43530;
+        }
+        .from_work:before {
+            content: " ";
+            position: absolute;
+            left: 15px;
+            bottom: 18px;
+            height: 14px;
+            border-left: 4px solid #00A0E9;
+        }
+        .weui-tabbar {
+            position: fixed;
+            background-color: #FFF;
+            padding-bottom: 4px;
+        }
+        .weui-tabbar__a {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            border-radius: 25px;
+            margin: 0 5px;
+        }
+        .weui-tabbar__label {
+            font-size: 16px;
+            line-height: 2.4em;
+            color: #fff;
+        }
+        .exception-btn {
+            color: #ff0045;
+            font-size: 15px;
+            float: right;
+        }
+        .btn_hide {
+            display: none;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="md_panel">
+        <div class="md_head">
+            <div class="md_selectarea">
+                <a class="md_prev change_month" href="javascript:;">&lt;</a>
+                <a class="md_headtext yeartag" href="javascript:;"></a>
+                <a class="md_headtext monthtag" href="javascript:;"></a>
+                <a class="md_next change_month" href="javascript:;">&gt;</a>
+            </div></div>
+        <div class="md_body">
+            <ul class="md_weekarea">
+                <li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li>
+            </ul>
+            <ul class="md_datearea in"></ul>
+        </div>
+    </div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                <img src="images/avatar.jpg" class="img-avatar_circle">
+            </div>
+            <div class="weui-cell__bd">
+                <div>
+                    <span><i class="qqq"></i>出勤 18天</span>
+                    <span><i class="qqq"></i>缺勤 00天</span>
+                    <p style="font-size: 14px;">Aster</p>
+                </div>
+                <div style="margin-top: 10px;">
+                    <span><i class="qqq"></i>迟到 00次</span>
+                    <span><i class="qqq"></i>请假 00天</span>
+                    <p style="font-size: 12px;color: #888888;">设计师</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+            <div style="margin-bottom: 5px;font-size: 15px;">考勤提醒</div>
+            <div class="weui-cell__bd">
+                <input class="weui-switch" style="margin-left: 6%;" type="checkbox">
+                <span><i class="qqq"></i>早退 01次</span>
+                <span><i class="qqq"></i>旷工 00天</span>
+            </div>
+        </div>
+    </div>
+    <div class="weui-form-preview" style="margin-bottom: 42px;">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">考勤打卡</label>
+                <label class="weui-form-preview__label j-choose_day"></label>
+                <label class="weui-form-preview__label exception-btn btn_hide">异常申请</label>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item go_to_work">
+                <label class="weui-form-preview__label" style="padding-left: 20px;">08:58</label>
+                <label class="weui-form-preview__label">上班签到</label>
+                <span class="weui-form-preview__value">前台大门</span>
+            </div>
+            <div class="weui-form-preview__item from_work">
+                <label class="weui-form-preview__label" style="padding-left: 20px;">18:28</label>
+                <label class="weui-form-preview__label">下班打卡</label>
+                <span class="weui-form-preview__value">前台大门</span>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tabbar">
+        <a href="javascript:;" class="weui-tabbar__a j-work_on_leave" style="background-color: #00CCCC;">
+            <p class="weui-tabbar__label">请假申请</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__a j-working_overtime" style="background-color: #db26dc;">
+            <p class="weui-tabbar__label">加班申请</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__a j-my_application" style="background-color: #04BE02">
+            <p class="weui-tabbar__label">我的申请</p>
+        </a>
+    </div>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="dater/zepto.mdater.js"></script>
+<script>
+    $(function() {
+        $('.j-choose_day').mdater();
+        // 跳转到我的页面
+        $('.img-avatar_circle').on('click', function(){
+            location.href = 'my_information.html';
+        });
+        // 跳转到异常申请页面
+        $('.exception-btn').on('click', function(){
+            location.href = 'work_exception.html';
+        });
+        // 跳转到请假申请页面
+        $('.j-work_on_leave').on('click', function(){
+            location.href = 'work_on_leave.html';
+        });
+        // 跳转到加班申请页面
+        $('.j-working_overtime').on('click', function(){
+            location.href = 'working_overtime.html';
+        });
+        // 跳转到我的申请页面
+        $('.j-my_application').on('click', function(){
+            location.href = 'my_application.html';
+        });
+        $(document).on('click', '.md_datearea li', function(e){
+            var el = $(e.target);
+
+            if(el.hasClass('exception')){
+                $('.exception-btn').removeClass('btn_hide');
+            } else {
+                $('.exception-btn').addClass('btn_hide');
+            }
+        });
+    });
+</script>
+</body>
+</html>

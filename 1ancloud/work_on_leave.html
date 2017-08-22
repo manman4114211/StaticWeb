@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>请假申请</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-leave_type" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>请假类型</p>
+            </div>
+            <div class="weui-cell__ft">事假</div>
+        </a>
+    </div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-start_time" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>开始时间</p>
+            </div>
+            <div class="weui-cell__ft">
+                <span id="start_day"></span> <span id="start_time"></span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access j-end_time" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>结束时间</p>
+            </div>
+            <div class="weui-cell__ft">
+                <span id="end_day"></span> <span id="end_time"></span>
+            </div>
+        </a>
+    </div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>请假天数</p>
+            </div>
+            <div class="weui-cell__ft"><span id="total_day"></span>天</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请假事由" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="js/weui.min.js"></script>
+<script>
+    $(function() {
+        var start_date,start_time,end_date,end_time;
+        // 给日期类对象添加日期差方法，返回日期与diff参数日期的时间差，单位为天s
+        Date.prototype.diff = function(date){
+            return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+        }
+        $('.j-leave_type').on('click', function () {
+            var _this = $(this);
+
+            var type = [{
+                label: '年休假',
+                value: 0
+            }, {
+                label: '病假',
+                value: 1
+            }, {
+                label: '婚假',
+                value: 2
+            },{
+                label: '事假',
+                //disabled: true,
+                value: 3
+            }, {
+                label: '孕产假',
+                value: 4
+            }, {
+                label: '调休',
+                value: 5
+            }, {
+                label: '其它',
+                value: 6
+            }];
+            weui.picker(type, {
+                onConfirm: function (result) {
+                    _this.find('.weui-cell__ft').html(type[result].label);
+                }
+            });
+        });
+        $('.j-start_time').on('click', function(){
+            weui.datePicker({
+                start: new Date().getFullYear()-1,
+                end: new Date().getFullYear()+1,
+                defaultValue: [new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()],
+                className: 'ma_date_picker',
+                onConfirm: function (result) {
+                    start_date = result[0]+"-"+(parseInt(result[1]))+"-"+result[2];
+                    $('#start_day').html(result[0]+"/"+(parseInt(result[1]))+"/"+result[2]);
+                    // 二级调用：时间
+                    $('.ma_date_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        var type = [{
+                            label: '上午',
+                            value: 0
+                        }, {
+                            label: '下午',
+                            value: 1
+                        }];
+                        weui.picker(type, {
+                            defaultValue: [0],
+                            onConfirm: function (result) {
+                                start_time = result;
+                                $('#start_time').html(type[result].label);
+                                if(end_date){
+                                    $('#total_day').html(getTotalDay());
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        });
+        $('.j-end_time').on('click', function(){
+            weui.datePicker({
+                start: new Date().getFullYear()-1,
+                end: new Date().getFullYear()+1,
+                defaultValue: [new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()],
+                className: 'ma_date_picker',
+                onConfirm: function (result) {
+                    end_date = result[0]+"-"+(parseInt(result[1]))+"-"+result[2];
+                    $('#end_day').html(result[0]+"/"+(parseInt(result[1]))+"/"+result[2]);
+                    // 二级调用：时间
+                    $('.ma_date_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        var type = [{
+                            label: '上午',
+                            value: 0
+                        }, {
+                            label: '下午',
+                            value: 1
+                        }];
+                        weui.picker(type, {
+                            defaultValue: [1],
+                            onConfirm: function (result) {
+                                end_time = result;
+                                $('#end_time').html(type[result].label);
+                                if(start_date){
+                                    $('#total_day').html(getTotalDay());
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        });
+        function getTotalDay(){
+            var big_date = new Date(end_date);
+            var small_date = new Date(start_date);
+            var end_check = big_date.diff(small_date);
+            if(end_check < 0) {
+                alert('结束时间不能小于开始时间');
+                return 0;
+            }
+            if(end_check == 0){
+                if(start_time > end_time) {
+                    alert('结束时间不能小于开始时间');
+                    return 0;
+                } else if (start_time < end_time) {
+                    return 1;
+                } else {
+                    return 0.5;
+                }
+            }
+            if(end_check > 0){
+                if(start_time > end_time) {
+                    return end_check;
+                } else if (start_time < end_time) {
+                    return end_check + 1;
+                } else {
+                    return end_check + 0.5;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>加班申请</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-day_type" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>是否法定节假日</p>
+            </div>
+            <div class="weui-cell__ft">是</div>
+        </a>
+    </div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-overtime_type" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>加班核算方式</p>
+            </div>
+            <div class="weui-cell__ft">申请调休</div>
+        </a>
+    </div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access j-start_time" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>开始时间</p>
+            </div>
+            <div class="weui-cell__ft">
+                <span id="start_day"></span> <span id="start_time"></span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access j-end_time" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>结束时间</p>
+            </div>
+            <div class="weui-cell__ft">
+                <span id="end_day"></span> <span id="end_time"></span>
+            </div>
+        </a>
+    </div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>时长</p>
+            </div>
+            <div class="weui-cell__ft"><span id="total_time"></span>小时</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="加班原因" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="js/weui.min.js"></script>
+<script>
+    $(function() {
+        var start_date,start_time,end_date,end_time;
+        var fmtStr = function(str) {
+            if(str.length == 1)
+                str = '0'+str;
+            return str;
+        }
+        // 给日期类对象添加日期差方法，返回日期与diff参数日期的时间差，单位为天s
+        Date.prototype.diff = function(date){
+            return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+        }
+        $('.j-day_type').on('click', function () {
+            var _this = $(this);
+
+            var type = [{
+                label: '否',
+                value: 0
+            }, {
+                label: '是',
+                value: 1
+            }];
+            weui.picker(type, {
+                defaultValue: [0],
+                onConfirm: function (result) {
+                    _this.find('.weui-cell__ft').html(type[result].label);
+                }
+            });
+        });
+        $('.j-overtime_type').on('click', function () {
+            var _this = $(this);
+
+            var type = [{
+                label: '申请调休',
+                value: 0
+            }, {
+                label: '申请加班费',
+                value: 1
+            }];
+            weui.picker(type, {
+                defaultValue: [0],
+                onConfirm: function (result) {
+                    _this.find('.weui-cell__ft').html(type[result].label);
+                }
+            });
+        });
+        $('.j-start_time').on('click', function(){
+            weui.datePicker({
+                start: new Date().getFullYear()-1,
+                end: new Date().getFullYear()+1,
+                defaultValue: [new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()],
+                className: 'ma_date_picker',
+                onConfirm: function (result) {
+                    start_date = result[0]+"-"+(parseInt(result[1]))+"-"+result[2];
+                    $('#start_day').html(result[0]+"/"+(parseInt(result[1]))+"/"+result[2]);
+                    // 二级调用：时间
+                    $('.ma_date_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        var hours = [];
+                        var minutes = [];
+                        for(var i=0; i<=23; i++) {
+                            var t = {
+                                label: fmtStr(i+''),
+                                value: i
+                            };
+                            hours.push(t);
+                        }
+                        for(var j=0; j<=59; j+=5){
+                            var t = {
+                                label: fmtStr(j+''),
+                                value: j
+                            };
+                            minutes.push(t);
+                        }
+                        weui.picker(hours, minutes, {
+                            defaultValue: [18, 30],
+                            onConfirm: function (result) {
+                                start_time = result;
+                                $('#start_time').html(result[0]+':'+result[1]);
+                                if(end_date){
+                                    //$('#total_day').html(getTotalDay());
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        });
+        $('.j-end_time').on('click', function(){
+            weui.datePicker({
+                start: new Date().getFullYear()-1,
+                end: new Date().getFullYear()+1,
+                defaultValue: [new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()],
+                className: 'ma_date_picker',
+                onConfirm: function (result) {
+                    end_date = result[0]+"-"+(parseInt(result[1]))+"-"+result[2];
+                    $('#end_day').html(result[0]+"/"+(parseInt(result[1]))+"/"+result[2]);
+                    // 二级调用：时间
+                    $('.ma_date_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        var hours = [];
+                        var minutes = [];
+                        for(var i=0; i<=23; i++) {
+                            var t = {
+                                label: fmtStr(i+''),
+                                value: i
+                            };
+                            hours.push(t);
+                        }
+                        for(var j=0; j<=59; j+=5){
+                            var t = {
+                                label: fmtStr(j+''),
+                                value: j
+                            };
+                            minutes.push(t);
+                        }
+                        weui.picker(hours, minutes, {
+                            defaultValue: [18, 30],
+                            onConfirm: function (result) {
+                                end_time = result;
+                                $('#end_time').html(result[0]+':'+result[1]);
+                                if(start_date){
+                                    //$('#total_day').html(getTotalDay());
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

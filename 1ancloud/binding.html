@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>手机绑定</title>
+    <link rel="stylesheet" href="css/weui.css"/>
+    <link rel="stylesheet" href="dater/zepto.mdater.css">
+    <style>
+        .logo_img {
+            width: 100%;
+            height: 260px;
+            text-align: center;
+            background: linear-gradient(to right, #0096ff, #40d2fe);
+        }
+        .logo_img img {
+            width: 30%;
+            max-width: 140px;
+            margin-top: 30px;
+        }
+        .logo_img p {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .binding_form {
+            position: absolute;
+            padding: 20px;
+            left: calc(10% - 20px);
+            width: 80%;
+            top: 210px;
+            background: url(images/bg_binding_form.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        .weui-cells_form {
+            margin: 15px;
+            font-size: 15px;
+        }
+        .button-sp-area {
+            margin: 20px 0 -24px;
+            padding: 0 40px;
+        }
+        .weui-btn {
+            border-radius: 23px;
+            background: linear-gradient(to right, #0096ff, #40d2fe);
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="logo_img"><img src="images/logo.png"><p>一安云</p></div>
+    <div class="binding_form">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"><img src="images/avatar_admin.png" alt="" style="width:25px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+                <p style="font-size: 14px;">管理员 <span style="color: #4d4d4d;">邀请您加入</span> 高科技公司</p>
+            </div>
+        </a>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="您的真实姓名">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" pattern="[0-9]*" placeholder="您的手机号码">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" placeholder="请输入验证码">
+                </div>
+                <div class="weui-cell__ft">
+                    <button class="weui-vcode-btn">获取验证码</button>
+                </div>
+            </div>
+        </div>
+        <div class="button-sp-area">
+            <a href="javascript:;" class="weui-btn">加入公司</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="dater/zepto.mdater.js"></script>
+<script>
+    $(function() {
+
+    });
+</script>
+</body>
+</html>
